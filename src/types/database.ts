@@ -19,6 +19,7 @@ export interface Database {
         Row: {
           id: string;
           name: string;
+          slug: string | null;
           zendesk_subdomain: string | null;
           created_at: string;
           updated_at: string;
@@ -26,6 +27,7 @@ export interface Database {
         Insert: {
           id?: string;
           name: string;
+          slug?: string | null;
           zendesk_subdomain?: string | null;
           created_at?: string;
           updated_at?: string;
@@ -33,6 +35,7 @@ export interface Database {
         Update: {
           id?: string;
           name?: string;
+          slug?: string | null;
           zendesk_subdomain?: string | null;
           created_at?: string;
           updated_at?: string;
@@ -190,7 +193,7 @@ export interface Database {
           organization_id: string;
           title: string;
           content: string;
-          source: "zendesk" | "upload";
+          source: "zendesk" | "upload" | "generated";
           zendesk_id: string | null;
           file_name: string | null;
           file_type: string | null;
@@ -203,7 +206,7 @@ export interface Database {
           organization_id: string;
           title: string;
           content: string;
-          source: "zendesk" | "upload";
+          source: "zendesk" | "upload" | "generated";
           zendesk_id?: string | null;
           file_name?: string | null;
           file_type?: string | null;
@@ -216,7 +219,7 @@ export interface Database {
           organization_id?: string;
           title?: string;
           content?: string;
-          source?: "zendesk" | "upload";
+          source?: "zendesk" | "upload" | "generated";
           zendesk_id?: string | null;
           file_name?: string | null;
           file_type?: string | null;
@@ -232,8 +235,10 @@ export interface Database {
           content: string;
           confidence_score: number;
           sources: Json;
-          status: "pending" | "approved" | "rejected";
+          status: "pending" | "approved" | "rejected" | "sent";
           edited_content: string | null;
+          was_edited: boolean;
+          sent_at: string | null;
           created_by: string;
           reviewed_by: string | null;
           reviewed_at: string | null;
@@ -245,8 +250,10 @@ export interface Database {
           content: string;
           confidence_score: number;
           sources?: Json;
-          status?: "pending" | "approved" | "rejected";
+          status?: "pending" | "approved" | "rejected" | "sent";
           edited_content?: string | null;
+          was_edited?: boolean;
+          sent_at?: string | null;
           created_by: string;
           reviewed_by?: string | null;
           reviewed_at?: string | null;
@@ -258,8 +265,10 @@ export interface Database {
           content?: string;
           confidence_score?: number;
           sources?: Json;
-          status?: "pending" | "approved" | "rejected";
+          status?: "pending" | "approved" | "rejected" | "sent";
           edited_content?: string | null;
+          was_edited?: boolean;
+          sent_at?: string | null;
           created_by?: string;
           reviewed_by?: string | null;
           reviewed_at?: string | null;
@@ -301,6 +310,41 @@ export interface Database {
           created_at?: string;
         };
       };
+      sync_state: {
+        Row: {
+          id: string;
+          organization_id: string;
+          sync_type: "tickets" | "kb_articles";
+          last_sync_at: string | null;
+          last_synced_cursor: string | null;
+          status: "idle" | "running" | "failed";
+          error_message: string | null;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          organization_id: string;
+          sync_type: "tickets" | "kb_articles";
+          last_sync_at?: string | null;
+          last_synced_cursor?: string | null;
+          status?: "idle" | "running" | "failed";
+          error_message?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          organization_id?: string;
+          sync_type?: "tickets" | "kb_articles";
+          last_sync_at?: string | null;
+          last_synced_cursor?: string | null;
+          status?: "idle" | "running" | "failed";
+          error_message?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+      };
     };
     Views: {
       [_ in never]: never;
@@ -317,7 +361,7 @@ export interface Database {
           id: string;
           title: string;
           content: string;
-          source: "zendesk" | "upload";
+          source: "zendesk" | "upload" | "generated";
           similarity: number;
         }[];
       };
@@ -339,9 +383,11 @@ export interface Database {
     };
     Enums: {
       user_role: "admin" | "agent";
-      draft_status: "pending" | "approved" | "rejected";
-      knowledge_source: "zendesk" | "upload";
+      draft_status: "pending" | "approved" | "rejected" | "sent";
+      knowledge_source: "zendesk" | "upload" | "generated";
       message_author_type: "customer" | "agent" | "system";
+      sync_type: "tickets" | "kb_articles";
+      sync_status: "idle" | "running" | "failed";
     };
   };
 }
