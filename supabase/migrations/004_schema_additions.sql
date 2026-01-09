@@ -63,20 +63,20 @@ ALTER TABLE sync_state ENABLE ROW LEVEL SECURITY;
 -- Admins can view sync state for their org
 CREATE POLICY "Admins can view sync state"
     ON sync_state FOR SELECT
-    USING (organization_id = auth.user_organization_id() AND auth.is_admin());
+    USING (organization_id = public.get_user_organization_id() AND public.is_user_admin());
 
 -- Admins can manage sync state
 CREATE POLICY "Admins can insert sync state"
     ON sync_state FOR INSERT
-    WITH CHECK (organization_id = auth.user_organization_id() AND auth.is_admin());
+    WITH CHECK (organization_id = public.get_user_organization_id() AND public.is_user_admin());
 
 CREATE POLICY "Admins can update sync state"
     ON sync_state FOR UPDATE
-    USING (organization_id = auth.user_organization_id() AND auth.is_admin());
+    USING (organization_id = public.get_user_organization_id() AND public.is_user_admin());
 
 CREATE POLICY "Admins can delete sync state"
     ON sync_state FOR DELETE
-    USING (organization_id = auth.user_organization_id() AND auth.is_admin());
+    USING (organization_id = public.get_user_organization_id() AND public.is_user_admin());
 
 -- Grant access
 GRANT ALL ON sync_state TO authenticated;
