@@ -5,22 +5,28 @@
 
 -- --------------------------------------------
 -- Helper function to get current user's org
+-- (Created in public schema - auth schema is protected)
 -- --------------------------------------------
-CREATE OR REPLACE FUNCTION auth.user_organization_id()
+CREATE OR REPLACE FUNCTION public.get_user_organization_id()
 RETURNS uuid
 LANGUAGE sql
 STABLE
+SECURITY DEFINER
 AS $$
     SELECT organization_id FROM public.users WHERE id = auth.uid()
 $$;
 
 -- Helper function to check if user is admin
-CREATE OR REPLACE FUNCTION auth.is_admin()
+CREATE OR REPLACE FUNCTION public.is_user_admin()
 RETURNS boolean
 LANGUAGE sql
 STABLE
+SECURITY DEFINER
 AS $$
-    SELECT role = 'admin' FROM public.users WHERE id = auth.uid()
+    SELECT COALESCE(
+        (SELECT role = 'admin' FROM public.users WHERE id = auth.uid()),
+        false
+    )
 $$;
 
 -- --------------------------------------------
@@ -41,12 +47,12 @@ ALTER TABLE audit_logs ENABLE ROW LEVEL SECURITY;
 -- Users can only view their own organization
 CREATE POLICY "Users can view own organization"
     ON organizations FOR SELECT
-    USING (id = auth.user_organization_id());
+    USING (id = public.get_user_organization_id());
 
 -- Only admins can update organization settings
 CREATE POLICY "Admins can update own organization"
     ON organizations FOR UPDATE
-    USING (id = auth.user_organization_id() AND auth.is_admin());
+    USING (id = public.get_user_organization_id() AND public.is_user_admin());
 
 -- --------------------------------------------
 -- Users Policies
@@ -54,7 +60,7 @@ CREATE POLICY "Admins can update own organization"
 -- Users can view members of their organization
 CREATE POLICY "Users can view org members"
     ON users FOR SELECT
-    USING (organization_id = auth.user_organization_id());
+    USING (organization_id = public.get_user_organization_id());
 
 -- Users can update their own profile
 CREATE POLICY "Users can update own profile"
@@ -64,11 +70,11 @@ CREATE POLICY "Users can update own profile"
 -- Admins can manage users in their organization
 CREATE POLICY "Admins can insert users"
     ON users FOR INSERT
-    WITH CHECK (organization_id = auth.user_organization_id() AND auth.is_admin());
+    WITH CHECK (organization_id = public.get_user_organization_id() AND public.is_user_admin());
 
 CREATE POLICY "Admins can delete users"
     ON users FOR DELETE
-    USING (organization_id = auth.user_organization_id() AND auth.is_admin() AND id != auth.uid());
+    USING (organization_id = public.get_user_organization_id() AND public.is_user_admin() AND id != auth.uid());
 
 -- --------------------------------------------
 -- Zendesk Credentials Policies
@@ -76,19 +82,19 @@ CREATE POLICY "Admins can delete users"
 -- Only admins can view/manage Zendesk credentials
 CREATE POLICY "Admins can view zendesk credentials"
     ON zendesk_credentials FOR SELECT
-    USING (organization_id = auth.user_organization_id() AND auth.is_admin());
+    USING (organization_id = public.get_user_organization_id() AND public.is_user_admin());
 
 CREATE POLICY "Admins can insert zendesk credentials"
     ON zendesk_credentials FOR INSERT
-    WITH CHECK (organization_id = auth.user_organization_id() AND auth.is_admin());
+    WITH CHECK (organization_id = public.get_user_organization_id() AND public.is_user_admin());
 
 CREATE POLICY "Admins can update zendesk credentials"
     ON zendesk_credentials FOR UPDATE
-    USING (organization_id = auth.user_organization_id() AND auth.is_admin());
+    USING (organization_id = public.get_user_organization_id() AND public.is_user_admin());
 
 CREATE POLICY "Admins can delete zendesk credentials"
     ON zendesk_credentials FOR DELETE
-    USING (organization_id = auth.user_organization_id() AND auth.is_admin());
+    USING (organization_id = public.get_user_organization_id() AND public.is_user_admin());
 
 -- --------------------------------------------
 -- Tickets Policies
@@ -96,17 +102,17 @@ CREATE POLICY "Admins can delete zendesk credentials"
 -- All org users can view tickets
 CREATE POLICY "Users can view org tickets"
     ON tickets FOR SELECT
-    USING (organization_id = auth.user_organization_id());
+    USING (organization_id = public.get_user_organization_id());
 
 -- Service role can insert tickets (from webhook/sync)
 CREATE POLICY "Service role can insert tickets"
     ON tickets FOR INSERT
-    WITH CHECK (organization_id = auth.user_organization_id());
+    WITH CHECK (organization_id = public.get_user_organization_id());
 
 -- Users can update tickets in their org
 CREATE POLICY "Users can update org tickets"
     ON tickets FOR UPDATE
-    USING (organization_id = auth.user_organization_id());
+    USING (organization_id = public.get_user_organization_id());
 
 -- --------------------------------------------
 -- Ticket Messages Policies
@@ -118,7 +124,7 @@ CREATE POLICY "Users can view org ticket messages"
         EXISTS (
             SELECT 1 FROM tickets t
             WHERE t.id = ticket_messages.ticket_id
-            AND t.organization_id = auth.user_organization_id()
+            AND t.organization_id = public.get_user_organization_id()
         )
     );
 
@@ -129,7 +135,7 @@ CREATE POLICY "Users can insert ticket messages"
         EXISTS (
             SELECT 1 FROM tickets t
             WHERE t.id = ticket_messages.ticket_id
-            AND t.organization_id = auth.user_organization_id()
+            AND t.organization_id = public.get_user_organization_id()
         )
     );
 
@@ -139,20 +145,20 @@ CREATE POLICY "Users can insert ticket messages"
 -- All org users can view knowledge articles
 CREATE POLICY "Users can view org knowledge"
     ON knowledge_articles FOR SELECT
-    USING (organization_id = auth.user_organization_id());
+    USING (organization_id = public.get_user_organization_id());
 
 -- Admins can manage knowledge articles
 CREATE POLICY "Admins can insert knowledge"
     ON knowledge_articles FOR INSERT
-    WITH CHECK (organization_id = auth.user_organization_id() AND auth.is_admin());
+    WITH CHECK (organization_id = public.get_user_organization_id() AND public.is_user_admin());
 
 CREATE POLICY "Admins can update knowledge"
     ON knowledge_articles FOR UPDATE
-    USING (organization_id = auth.user_organization_id() AND auth.is_admin());
+    USING (organization_id = public.get_user_organization_id() AND public.is_user_admin());
 
 CREATE POLICY "Admins can delete knowledge"
     ON knowledge_articles FOR DELETE
-    USING (organization_id = auth.user_organization_id() AND auth.is_admin());
+    USING (organization_id = public.get_user_organization_id() AND public.is_user_admin());
 
 -- --------------------------------------------
 -- AI Drafts Policies
@@ -164,7 +170,7 @@ CREATE POLICY "Users can view org drafts"
         EXISTS (
             SELECT 1 FROM tickets t
             WHERE t.id = ai_drafts.ticket_id
-            AND t.organization_id = auth.user_organization_id()
+            AND t.organization_id = public.get_user_organization_id()
         )
     );
 
@@ -176,7 +182,7 @@ CREATE POLICY "Users can create drafts"
         AND EXISTS (
             SELECT 1 FROM tickets t
             WHERE t.id = ai_drafts.ticket_id
-            AND t.organization_id = auth.user_organization_id()
+            AND t.organization_id = public.get_user_organization_id()
         )
     );
 
@@ -187,7 +193,7 @@ CREATE POLICY "Users can update drafts"
         EXISTS (
             SELECT 1 FROM tickets t
             WHERE t.id = ai_drafts.ticket_id
-            AND t.organization_id = auth.user_organization_id()
+            AND t.organization_id = public.get_user_organization_id()
         )
     );
 
@@ -197,12 +203,12 @@ CREATE POLICY "Users can update drafts"
 -- Admins can view audit logs for their org
 CREATE POLICY "Admins can view org audit logs"
     ON audit_logs FOR SELECT
-    USING (organization_id = auth.user_organization_id() AND auth.is_admin());
+    USING (organization_id = public.get_user_organization_id() AND public.is_user_admin());
 
 -- All authenticated users can insert audit logs (via triggers/functions)
 CREATE POLICY "Users can insert audit logs"
     ON audit_logs FOR INSERT
-    WITH CHECK (organization_id = auth.user_organization_id());
+    WITH CHECK (organization_id = public.get_user_organization_id());
 
 -- --------------------------------------------
 -- Grant access to authenticated users
