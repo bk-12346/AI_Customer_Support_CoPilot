@@ -19,8 +19,10 @@ interface BitextRecord {
 }
 
 interface MakTekRecord {
-  Question: string;
-  Answer: string;
+  Question?: string;
+  Answer?: string;
+  question?: string;
+  answer?: string;
 }
 
 interface KBArticle {
@@ -78,7 +80,7 @@ async function fetchAllRows<T>(datasetName: string, maxRows: number = 50000): Pr
   let offset = 0;
   let consecutiveErrors = 0;
   const maxConsecutiveErrors = 5;
-  let rateLimitBackoff = 1000; // Start with 1 second for rate limit backoff
+  let rateLimitBackoff = 5000; // Start with 5 seconds for rate limit backoff
 
   console.log(`  Fetching rows from ${datasetName}...`);
 
@@ -102,11 +104,12 @@ async function fetchAllRows<T>(datasetName: string, maxRows: number = 50000): Pr
           await new Promise(resolve => setTimeout(resolve, waitTime));
           
           // Exponential backoff: double the wait time for next rate limit
-          rateLimitBackoff = Math.min(rateLimitBackoff * 2, 60000); // Cap at 60 seconds
+          rateLimitBackoff = Math.min(rateLimitBackoff * 2, 120000); // Cap at 120 seconds (2 minutes)
           consecutiveErrors++;
           
           if (consecutiveErrors >= maxConsecutiveErrors) {
-            console.error(`  Too many rate limit errors. Stopping at ${rows.length} rows.`);
+            console.warn(`  Too many rate limit errors. Continuing with ${rows.length} rows fetched so far.`);
+            console.warn(`  You can run the script again later to fetch more data.`);
             break;
           }
           
@@ -133,8 +136,8 @@ async function fetchAllRows<T>(datasetName: string, maxRows: number = 50000): Pr
         console.log(`  Fetched ${rows.length} rows...`);
       }
 
-      // Increased delay to avoid rate limiting (500ms instead of 100ms)
-      await new Promise(resolve => setTimeout(resolve, 500));
+      // Increased delay to avoid rate limiting (2 seconds between requests)
+      await new Promise(resolve => setTimeout(resolve, 2000));
 
     } catch (error) {
       consecutiveErrors++;
@@ -292,17 +295,21 @@ function processMakTekToFAQ(records: MakTekRecord[]): KBArticle[] {
   const seen = new Set<string>();
 
   for (const record of records) {
+    // Handle both uppercase and lowercase field names
+    const question = record.Question || record.question;
+    const answer = record.Answer || record.answer;
+
+    // Skip empty records first
+    if (!record || !question || !answer) continue;
+
     // Skip duplicates
-    const key = record.Question.toLowerCase().trim();
+    const key = question.toLowerCase().trim();
     if (seen.has(key)) continue;
     seen.add(key);
 
-    // Skip empty records
-    if (!record.Question || !record.Answer) continue;
-
     articles.push({
-      title: record.Question.trim(),
-      content: record.Answer.trim(),
+      title: question.trim(),
+      content: answer.trim(),
       category: 'FAQ',
       source: 'generated'
     });
