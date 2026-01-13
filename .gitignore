@@ -49,3 +49,7 @@ supabase/.temp/
 # Misc
 *.log
 *.local
+
+# Data files
+data/raw/
+*.parquet
