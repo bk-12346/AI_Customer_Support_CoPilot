@@ -1,1 +1,902 @@
-[]
+[
+  {
+    "input": "i need help seeing the cancellation fee",
+    "expected_output": "Absolutely! I can help you with that. To view the cancellation fee, please provide me with your account details or contact our customer support team for further assistance.",
+    "intent": "check_cancellation_fee",
+    "category": "Cancel"
+  },
+  {
+    "input": "wanna know more about modifying my delivery address",
+    "expected_output": "Sure! Modifying your delivery address is easy. You can simply log into your account on our website and navigate to the account settings or profile section. From there, you should be able to find an option to edit your address details. If you encounter any difficulties, don't hesitate to reach out to our customer support team, and they will be happy to assist you further.",
+    "intent": "change_shipping_address",
+    "category": "Shipping"
+  },
+  {
+    "input": "I want assistance cancelling purchase {{Order Number}}",
+    "expected_output": "I see your request to cancel your purchase with the order number {{Order Number}}. Please accept my sincerest apologies for any inconvenience caused. Rest assured, I'm here to assist you with the cancellation process.\n\nTo cancel your purchase, please follow these steps:\n\n1. Log into your {{Online Company Portal Info}} using your credentials.\n2. Navigate to the '{{Online Order Interaction}}' or '{{Online Order Interaction}}' section within your account.\n3. Look for the specific purchase associated with the order number {{Order Number}}.\n4. Click on the purchase to access the order details.\n5. Locate the option labeled '{{Online Order Interaction}}' and select it to initiate the cancellation process.\n6. If required, provide any additional information or feedback requested by the system to proceed with the cancellation.\n7. Once you've completed the cancellation process, you will receive a confirmation notification.\n\nIf you face any difficulties or have further questions during the cancellation process, don't hesitate to reach out to our dedicated support team. You can contact us during {{Customer Support Hours}} at {{Customer Support Phone Number}} or through the Live Chat feature on our {{Website URL}}.\n\nOur goal is to ensure your satisfaction, and we truly appreciate your understanding as we strive to process your cancellation request as efficiently as possible.",
+    "intent": "cancel_order",
+    "category": "Order"
+  },
+  {
+    "input": "I can't afford purchase {{Order Number}}",
+    "expected_output": "I hear you loud and clear your financial concerns regarding purchase {{Order Number}}. Let's work together to find a suitable solution for you. Here are a few options to consider:\n\n1. **Return and Refund**: If the purchase hasn't been shipped yet, you may be eligible for a return and full refund. I recommend checking the return policy on our website or reaching out to our customer support team for assistance.\n2. **Exchange or Store Credit**: Some companies offer the option to exchange the purchase for a more affordable item or receive store credit that can be used on a future purchase. This could be a great way to find an alternative product within your budget.\n3. **Delayed Payment**: In certain cases, companies may offer the option to delay the payment or set up a payment plan. It's worth reaching out to our customer support team to inquire about any available flexibility in payment terms.\n4. **Discounts and Promotions**: Keep an eye on our website and social media channels for any ongoing discounts or promotions that may help reduce the cost of the purchase. Our customer support team can also provide you with information on any current offers.\n\nRemember, we're here to support you through this process. Feel free to reach out to our customer support team during {{Customer Support Hours}} at {{Customer Support Phone Number}} or via live chat on our website at {{Website URL}}. Together, we'll find a solution that works for you.",
+    "intent": "cancel_order",
+    "category": "Order"
+  },
+  {
+    "input": "can you help me edit purchase {{Order Number}}?",
+    "expected_output": "We sincerely appreciate your inquiry about editing purchase number {{Order Number}}. Our team is fully committed to assisting you with any modifications you need to make. To make sure we provide you with accurate guidance, could you please specify the changes you would like to make to your purchase? Your satisfaction is our top priority, and we will do our best to accommodate your request promptly. Please provide us with the details, and we will assist you accordingly.",
+    "intent": "change_order",
+    "category": "Order"
+  },
+  {
+    "input": "where could I cancel purchase {{Order Number}}?",
+    "expected_output": "I understood, you're looking for the location where you can cancel your purchase with the order number {{Order Number}}. To cancel your purchase, please follow these steps:\n\n1. Sign in to your account: Go to our {{Online Company Portal Info}} and log in using your credentials.\n2. Access your order details: Once you're signed in, navigate to your '{{Online Order Interaction}}' or '{{Online Order Interaction}}' section. This is where you can find all your past purchases.\n3. Locate the specific purchase: Look for the purchase with the order number {{Order Number}}. Click on it to view the details.\n4. Initiate the cancellation: Within the order details, you should see an option called '{{Online Order Interaction}}'. Click on it to start the cancellation process.\n5. Confirm the cancellation: The system may require you to confirm your cancellation or provide feedback. Please complete the necessary steps as instructed.\n\nIf you encounter any difficulties or have further questions, our dedicated support team is available during {{Customer Support Hours}}. You can reach us at {{Customer Support Phone Number}} or via the Live Chat feature on our website at {{Website URL}}. We're here to assist you every step of the way and ensure that your cancellation request is processed smoothly.",
+    "intent": "cancel_order",
+    "category": "Order"
+  },
+  {
+    "input": "help me to change several products of purchase {{Order Number}}",
+    "expected_output": "I can relate to the understanding that you need assistance with changing several products in your purchase with number {{Order Number}}. Thank you for reaching out to us for support. To assist you better, could you please provide me with the specific details of the products you would like to change? We want to make sure we fulfill your request accurately and efficiently. Your satisfaction is our priority, and we are here to help you with any modifications you require.",
+    "intent": "change_order",
+    "category": "Order"
+  },
+  {
+    "input": "i want help trying to modify my delivery address",
+    "expected_output": "I'm on it! I'm here to assist you with modifying your delivery address. To change your address, please follow these steps:\n\n1. Log into your account on our website.\n2. Go to the \"Account\" or \"Settings\" section.\n3. Look for the \"Delivery Address\" or \"Shipping Address\" option.\n4. Click on it and enter the updated address information.\n5. Save the changes.\n\nIf you encounter any difficulties or need further assistance, please don't hesitate to reach out to our customer support team.",
+    "intent": "change_shipping_address",
+    "category": "Shipping"
+  },
+  {
+    "input": "canmcel order {{Order Number}}",
+    "expected_output": "I'm sensitive to the fact that you're looking to cancel order {{Order Number}}. We apologize for any inconvenience caused. To cancel your order, please follow these steps:\n\n1. Sign in to your account: Access our platform by logging in with your credentials on our {{Online Company Portal Info}}.\n2. Go to your orders: Once you're signed in, navigate to the '{{Online Order Interaction}}' or '{{Online Order Interaction}}' section.\n3. Locate the specific order: Look for the order with the number {{Order Number}} and click on it to view the details.\n4. Initiate the cancellation: You should find an option labeled '{{Online Order Interaction}}' associated with your purchase. Please select it to start the cancellation process.\n5. Confirm the cancellation: The system may ask you to confirm the cancellation. Please provide any required information or feedback as requested.\n \nIf you encounter any issues or need further assistance, our dedicated support team is available during {{Customer Support Hours}} at {{Customer Support Phone Number}}, or you can use the Live Chat feature on our {{Website URL}}. We're committed to ensuring your satisfaction and will be here to help with any questions or concerns you may have.",
+    "intent": "cancel_order",
+    "category": "Order"
+  },
+  {
+    "input": "help me to add several items to order {{Order Number}}",
+    "expected_output": "I appreciate you reaching out to us for assistance. I understand that you would like to add several items to your order with the number {{Order Number}}. Our goal is to ensure complete satisfaction with your order, and we're here to help make any necessary adjustments. To proceed with the addition of the items, could you please provide me with the specific details of the items you would like to add? This information will enable us to promptly and accurately update your order according to your preferences. Thank you for your cooperation!",
+    "intent": "change_order",
+    "category": "Order"
+  },
+  {
+    "input": "can you tell me about a shipping address update?",
+    "expected_output": "Absolutely! If you need to update your shipping address, you can easily do so by accessing your account settings on our website. Simply log in, navigate to the \"Shipping Address\" section, and update the necessary information. Alternatively, you can contact our customer support team and they will be happy to assist you with updating your shipping address.",
+    "intent": "change_shipping_address",
+    "category": "Shipping"
+  },
+  {
+    "input": "I can't modify theaddress",
+    "expected_output": "I'm sorry to hear that you're unable to modify your address. Please reach out to our customer service team and they will assist you in making the necessary changes to your delivery address.",
+    "intent": "change_shipping_address",
+    "category": "Shipping"
+  },
+  {
+    "input": "how could I switch some products of order {{Order Number}}?",
+    "expected_output": "We appreciate your reaching out for assistance with switching some products in your order with the number {{Order Number}}. To proceed with the switch, please follow these steps:\n\n1. Log in to your account on our website.\n2. Navigate to the \"My Orders\" section.\n3. Locate the order with the number {{Order Number}} and click on it.\n4. You will see a list of items included in the order. Identify the product(s) you wish to switch.\n5. Contact our customer support team through the Live Chat feature or the provided phone number, and inform them about the specific products you want to switch. They will guide you through the process and provide further instructions.\n\nRest assured, we are here to ensure a smooth and satisfactory experience throughout the switch. For any additional queries or concerns, please don't hesitate to reach out.",
+    "intent": "change_order",
+    "category": "Order"
+  },
+  {
+    "input": "want help to see the termination charge",
+    "expected_output": "I'll make it happen! I can provide you with assistance in viewing the termination charge. To do so, you can log in to your account and navigate to the section where your account details are displayed. Look for any information related to termination or cancellation fees, and you should find the details you're looking for. If you're unable to locate this information, please let me know and I'll be more than happy to help you further.",
+    "intent": "check_cancellation_fee",
+    "category": "Cancel"
+  },
+  {
+    "input": "there are problems changing the address",
+    "expected_output": "We apologize for the inconvenience. Let us assist you in resolving the difficulties with updating the address.",
+    "intent": "change_shipping_address",
+    "category": "Shipping"
+  },
+  {
+    "input": "how could I check the early termination fees?",
+    "expected_output": "To check the early termination fees, you can either refer to the contract you signed when you initiated your service or contact our customer service department. They will assist you in providing the necessary information about the fees applicable for terminating your service early.",
+    "intent": "check_cancellation_fee",
+    "category": "Cancel"
+  },
+  {
+    "input": "supports trying to edit the address",
+    "expected_output": "Indeed! We are here to provide support for editing your address. Please provide us with the updated information and we will gladly assist you in making the necessary changes.",
+    "intent": "change_shipping_address",
+    "category": "Shipping"
+  },
+  {
+    "input": "want support trying to upate my shipping address",
+    "expected_output": "Sure, we are here to help you with updating your shipping address. Please provide us with your order details and the correct address, and we will assist you in making the necessary changes.",
+    "intent": "change_shipping_address",
+    "category": "Shipping"
+  },
+  {
+    "input": "i need help to see the early termination penalty",
+    "expected_output": "Absolutely! To view the early termination penalty, please log in to your account and navigate to the \"Termination Fees\" section. There, you will find all the relevant information regarding any fees or penalties for cancelling your service before the agreed-upon contract duration. If you have any further questions or require assistance, feel free to reach out to our customer support team.",
+    "intent": "check_cancellation_fee",
+    "category": "Cancel"
+  },
+  {
+    "input": "I don't know how I can see the termination fee",
+    "expected_output": "Not a problem! To find information about the termination fee, you can check the terms and conditions section of your contract or contact our customer service team for assistance.",
+    "intent": "check_cancellation_fee",
+    "category": "Cancel"
+  },
+  {
+    "input": "i need assistance cancelling purchase {{Order Number}}",
+    "expected_output": "I can relate that you require assistance with canceling your purchase of order number {{Order Number}}. Rest assured, we are here to help you through the process. To cancel your purchase, please follow these steps:\n\n1. Sign into Your Account: Access our platform by logging into your {{Online Company Portal Info}}.\n2. Locate Your Order: Once logged in, navigate to the '{{Online Order Interaction}}' or '{{Online Order Interaction}}' section.\n3. Find the Relevant Purchase: Look for the purchase associated with the order number {{Order Number}} and select it for details.\n4. Initiate the Cancellation: You will find an option labeled '{{Online Order Interaction}}' linked to your purchase. Please click on it to start the cancellation process.\n5. Follow Any Additional Instructions: The system might ask you a few questions for confirmation or feedback. Kindly provide the requested information.\n\nIf you encounter any difficulties or have further questions along the way, our dedicated support team is available to assist you during {{Customer Support Hours}}. You can reach us at {{Customer Support Phone Number}} or via the Live Chat feature on our {{Website URL}}.\n\nWe appreciate your understanding and cooperation in this matter, and we are committed to providing you with exceptional customer service.",
+    "intent": "cancel_order",
+    "category": "Order"
+  },
+  {
+    "input": "I want help to edit the address",
+    "expected_output": "Sure! I can assist you with editing your address. To do so, please follow these steps:\n1. Log in to your account.\n2. Go to your account settings.\n3. Look for the option to edit your address information.\n4. Make the necessary changes to update your address.\n5. Save the changes.\n\nIf you encounter any difficulties or need further assistance, feel free to reach out.",
+    "intent": "change_shipping_address",
+    "category": "Shipping"
+  },
+  {
+    "input": "i have to switch some bloody products of order {{Order Number}}",
+    "expected_output": "Thank you for bringing this to our attention. I understand that you need to switch some products in your order with the number {{Order Number}}. We apologize for any inconvenience caused. To ensure we assist you accurately, could you please provide the details of the specific products that you would like to switch? We are here to help make the necessary adjustments and ensure your satisfaction.",
+    "intent": "change_order",
+    "category": "Order"
+  },
+  {
+    "input": "help me cancelling purchase {{Order Number}}",
+    "expected_output": "Of course, I'm here to assist you with canceling your purchase with the purchase number {{Order Number}}. Let me guide you through the process:\n\n1. Log in to your {{Online Company Portal Info}} using your credentials.\n2. Once you're logged in, navigate to your '{{Online Order Interaction}}' or '{{Online Order Interaction}}' section.\n3. Locate the purchase with the purchase number {{Order Number}} and click on it.\n4. Look for the option labeled '{{Cancel Purchase}}' and select it.\n5. You may be asked to provide a reason for the cancellation, so please fill in the required information.\n6. Finally, confirm the cancellation to complete the process.\n\nIf you encounter any difficulties or have any questions, our dedicated support team is available to assist you. You can reach out to us during {{Customer Support Hours}} at {{Customer Support Phone Number}} or use the Live Chat feature on our {{Website URL}}. Rest assured that we're committed to ensuring your satisfaction and resolving any concerns you may have.",
+    "intent": "cancel_order",
+    "category": "Order"
+  },
+  {
+    "input": "how do ii modify order {{Order Number}}",
+    "expected_output": "We appreciate your inquiry to us with your request to modify order number {{Order Number}}. We're here to assist you in making the necessary changes. To modify your order, please follow these steps:\n\n1. Log in to your account on our website.\n2. Navigate to the \"Orders\" section or \"Order History.\"\n3. Locate the specific order that you want to modify.\n4. Click on the order details to access the specific items.\n5. Look for the \"Modify\" or \"Edit\" option next to each product you wish to make changes to.\n6. Select the \"Modify\" or \"Edit\" option and follow the prompts to make the desired modifications, such as changing quantity, size, or color.\n7. Once you have made the necessary changes, review your order to ensure everything is accurate.\n8. Proceed to the checkout page to finalize your modified order.\n\nIf you encounter any difficulties or require further assistance during the modification process, please don't hesitate to reach out to our customer support team. They are available {{Customer Support Hours}} at {{Customer Support Phone Number}} or through the Live Chat on our website at {{Website URL}}. We appreciate your business and are committed to ensuring your satisfaction.",
+    "intent": "change_order",
+    "category": "Order"
+  },
+  {
+    "input": "what do I need to do to check the termination charge?",
+    "expected_output": "To check the termination charge, you can access your account on our website and navigate to the cancellation fees section. Alternatively, you can contact our customer service team for assistance in checking the termination charge.",
+    "intent": "check_cancellation_fee",
+    "category": "Cancel"
+  },
+  {
+    "input": "remove article from purchase {{Order Number}}",
+    "expected_output": "We appreciate you reaching out to us for assistance in removing an article from purchase number {{Order Number}}. Your satisfaction is our top priority, and we are here to help. Could you please provide the specific details of the article you would like to remove? This will allow us to take the necessary steps to assist you further and ensure a seamless process. Thank you for your cooperation.",
+    "intent": "change_order",
+    "category": "Order"
+  },
+  {
+    "input": "can uhelp me to correct my delivery address",
+    "expected_output": "I'll take care of it! I'm here to assist you in correcting your delivery address. Please provide me with the necessary details of your current and updated address, and I'll guide you through the process step by step.",
+    "intent": "change_shipping_address",
+    "category": "Shipping"
+  },
+  {
+    "input": "can you help me to see the early exit charge?",
+    "expected_output": "Absolutely! I'd be more than happy to assist you in viewing the early exit charge. Please provide me with your account details, and I'll retrieve the information for you.",
+    "intent": "check_cancellation_fee",
+    "category": "Cancel"
+  },
+  {
+    "input": "I have a problem witrh cancelling purchase {{Order Number}}",
+    "expected_output": "I've understood, you're experiencing difficulties with canceling purchase {{Order Number}}. I apologize for any inconvenience caused by this issue. To resolve the problem, I recommend the following steps:\n\n1. Sign into Your Account: Access our platform by logging into your {{Online Company Portal Info}}.\n2. Locate Your Order: Once logged in, navigate to your '{{Online Order Interaction}}' or '{{Online Order Interaction}}' section.\n3. Find the Specific Purchase: Look for the purchase associated with the order number {{Order Number}}.\n4. Initiate Cancellation: You should see a cancellation option labeled '{{Online Order Interaction}}' linked to your purchase. Please select this option.\n5. Seek Assistance: If you encounter any further issues during the cancellation process or have additional questions, our dedicated support team is available {{Customer Support Hours}}. You can reach us by calling {{Customer Support Phone Number}} or by using the Live Chat feature on our website at {{Website URL}}.\n\nPlease don't hesitate to reach out to us for any further assistance or clarification you may need. Your satisfaction is our priority, and we are here to help you resolve this issue as quickly and smoothly as possible.",
+    "intent": "cancel_order",
+    "category": "Order"
+  },
+  {
+    "input": "swap an item of order {{Order Number}}",
+    "expected_output": "Thank you for reaching out! We understand that you would like to swap an item in your order with the number #{{Order Number}}. We are here to assist you with this request. Please provide us with the details of the item you wish to swap, including the product name, size, and quantity. Once we have the necessary information, we will ensure that the item is exchanged promptly. Your satisfaction is our top priority, and we appreciate your patience as we work to resolve this matter for you.",
+    "intent": "change_order",
+    "category": "Order"
+  },
+  {
+    "input": "how can I change my shipping address?",
+    "expected_output": "I apologize for any inconvenience you may be facing. To change your shipping address, please log in to your account and go to the \"My Account\" section. From there, you should be able to find an option to update your shipping address. If you encounter any difficulties or have further questions, feel free to reach out to our customer support team for assistance.",
+    "intent": "change_shipping_address",
+    "category": "Shipping"
+  },
+  {
+    "input": "needassistance cancelling purchase {{Order Number}}",
+    "expected_output": "I've understood that you need assistance with canceling purchase {{Order Number}}, and I'm here to guide you through the process. Please follow these steps:\n\n1. Access Your Account: Visit our {{Online Company Portal Info}} and log in using your credentials.\n2. Locate Your Purchase: Navigate to the '{{Online Order Interaction}}' or '{{Online Order Interaction}}' section within your account.\n3. Find the Relevant Purchase: Look for the purchase associated with the order number {{Order Number}} and click on it to view the details.\n4. Initiate the Cancellation: You should see an option labeled '{{Online Order Interaction}}' or similar. Please select it to begin the cancellation process.\n5. Follow Additional Instructions: The system may ask you to confirm the cancellation or provide feedback. Kindly complete any necessary steps.\n\nIf you encounter any difficulties or have further questions, our dedicated team is available to assist you. You can reach us during {{Customer Support Hours}} at {{Customer Support Phone Number}} or use the Live Chat feature on our {{Website URL}}. Your satisfaction is our top priority, and we're here to ensure a smooth cancellation experience.",
+    "intent": "cancel_order",
+    "category": "Order"
+  },
+  {
+    "input": "I can no longer afford order {{Order Number}}",
+    "expected_output": "I'm on the same page that financial situations can change, and it's important to prioritize your expenses. I'm here to help you with canceling order {{Order Number}} and find a suitable solution for you. Here's what we can do:\n\n1. Review the Cancelation Policy: Let's start by reviewing our cancelation policy for this specific order. This will give us a better understanding of the available options and any associated fees or penalties.\n2. Explore Alternatives: If canceling the order is not feasible, we can explore alternative solutions to accommodate your current financial situation. This might include adjusting the payment plan, exploring discounts or promotions, or deferring the purchase to a later date.\n3. Contact Customer Support: Our dedicated customer support team is ready to assist you further. Reach out to them during {{Customer Support Hours}} at {{Customer Support Phone Number}} or through the Live Chat on our website at {{Website URL}}. They will be able to guide you through the process and provide personalized assistance based on your specific circumstances.\n4. Stay Updated: Keep an eye on your email or notifications from us. We will also keep you informed about any updates or changes related to your order.\n\nRemember, your satisfaction is important to us, and we are committed to finding a solution that works for you.",
+    "intent": "cancel_order",
+    "category": "Order"
+  },
+  {
+    "input": "i need help with canceling order {{Order Number}}",
+    "expected_output": "I'm not mistaken your need for assistance in canceling order {{Order Number}}. Rest assured, I'm here to guide you through the process.\n\nTo cancel your order, please follow these steps:\n\n1. Log into your {{Online Company Portal Info}} using your credentials.\n2. Navigate to the '{{Online Order Interaction}}' or '{{Online Order Interaction}}' section.\n3. Locate the specific order with the order number {{Order Number}}.\n4. Look for the option labeled '{{Online Order Interaction}}' associated with that order.\n5. Follow any additional prompts or questions from the system to complete the cancellation successfully.\n\nIf you encounter any difficulties or have any questions along the way, our dedicated support team is available to assist you. You can reach us during {{Customer Support Hours}} at {{Customer Support Phone Number}} or through the Live Chat feature on our website at {{Website URL}}.\n\nWe appreciate your understanding and value your satisfaction.",
+    "intent": "cancel_order",
+    "category": "Order"
+  },
+  {
+    "input": "I have troubles trying to updste my delivery address",
+    "expected_output": "I apologize for the inconvenience you're experiencing with updating your delivery address. To assist you, please provide me with your order number and the correct address you would like to change it to. Once I have this information, I will be able to guide you through the process of updating your delivery address.",
+    "intent": "change_shipping_address",
+    "category": "Shipping"
+  },
+  {
+    "input": "will you show me the termination charge?",
+    "expected_output": "I'll take care of it! I'd be happy to provide you with all the information regarding the termination charge. Please give me a moment to check the details for you.",
+    "intent": "check_cancellation_fee",
+    "category": "Cancel"
+  },
+  {
+    "input": "I want assistance to check the early exit penalties",
+    "expected_output": "Sure! To check the early exit penalties, you can log in to your account and navigate to the \"Termination Fees\" section. This will provide you with all the information regarding any penalties for canceling your service early.",
+    "intent": "check_cancellation_fee",
+    "category": "Cancel"
+  },
+  {
+    "input": "I no longer want order {{Order Number}}",
+    "expected_output": "I understood, you no longer want to proceed with your order number {{Order Number}}. We apologize for any inconvenience this may cause. To cancel your order, please follow these steps:\n\n1. Sign in to your {{Online Company Portal Info}} using your credentials.\n2. Navigate to the '{{Online Order Interaction}}' or '{{Online Order Interaction}}' section.\n3. Locate the order with the number {{Order Number}}.\n4. Select the '{{Online Order Interaction}}' option associated with the order.\n5. Follow any additional instructions provided by the system to complete the cancellation process.\n\nIf you encounter any difficulties or have further questions, feel free to contact our dedicated support team during {{Customer Support Hours}} at {{Customer Support Phone Number}} or via the Live Chat feature on our {{Website URL}}. We are here to assist you and ensure your satisfaction.",
+    "intent": "cancel_order",
+    "category": "Order"
+  },
+  {
+    "input": "I need assistance canceling order {{Order Number}}",
+    "expected_output": "I understand your need for assistance in canceling your order with the order number {{Order Number}}. Our team is here to support you through the process and ensure a smooth cancellation experience. To get started, please follow these steps:\n\n1. Sign in to your {{Online Company Portal Info}} using your username and password.\n2. Navigate to the '{{Online Order Interaction}}' or '{{Online Order Interaction}}' section, where you'll find a list of your recent orders.\n3. Locate the specific order with the order number {{Order Number}} and open the order details.\n4. Look for the cancellation option associated with the order and click on it.\n5. Follow any additional prompts or instructions provided by the system to complete the cancellation.\n\nIn case you encounter any difficulties or have further questions, our dedicated support team is available during {{Customer Support Hours}}. Feel free to reach out to us at {{Customer Support Phone Number}} or through the Live Chat feature on our {{Website URL}}. We appreciate your patience and understanding throughout this process.",
+    "intent": "cancel_order",
+    "category": "Order"
+  },
+  {
+    "input": "can I edit my shipping address?",
+    "expected_output": "I'll get right on it! You have the option to edit your shipping address. Let me guide you through the process step by step.",
+    "intent": "change_shipping_address",
+    "category": "Shipping"
+  },
+  {
+    "input": "cancel purchase  {{Order Number}}",
+    "expected_output": "I've picked up that you are looking to cancel purchase {{Order Number}}. Our team is committed to resolving this for you promptly. To proceed with the cancellation process, please follow these steps:\n\n1. Access Your Account: Log in to your {{Online Company Portal Info}} using your credentials.\n2. Locate Your Order: Navigate to the '{{Online Order Interaction}}' or '{{Online Order Interaction}}' section within your account.\n3. Identify the Purchase: Look for purchase {{Order Number}} among your order list and select it.\n4. Initiate Cancellation: Click on the '{{Online Order Interaction}}' option associated with your purchase.\n5. Confirm the Cancellation: The system may prompt you for additional information or confirm your decision. Please provide the necessary details or confirm your cancellation request.\n\nIf there are any questions or complications along the way, our dedicated customer support team is available during {{Customer Support Hours}} at {{Customer Support Phone Number}} or through live chat on our website at {{Website URL}}. Your satisfaction is important to us, and we appreciate your understanding while we assist you with the cancellation process.",
+    "intent": "cancel_order",
+    "category": "Order"
+  },
+  {
+    "input": "I havbe problems updating my delivery address",
+    "expected_output": "We're sorry to hear that you're experiencing difficulties updating your delivery address. Please provide us with your order details and the new address you'd like to use, and we'll do our best to assist you in making the necessary changes.",
+    "intent": "change_shipping_address",
+    "category": "Shipping"
+  },
+  {
+    "input": "i dont want this order cancel purchase {{Order Number}}",
+    "expected_output": "I certainly recognize your desire to cancel your purchase with the order number {{Order Number}}. We want to ensure that you have a seamless experience. To cancel your purchase, please follow these steps:\n\n1. Sign into Your Account: Access our {{Online Company Portal Info}} by signing in to your account.\n2. Locate the Order: Once you are logged in, navigate to the '{{Online Order Interaction}}' or '{{Online Order Interaction}}' section.\n3. Identify Your Purchase: Look for the purchase associated with the order number {{Order Number}} and click on it to open the details.\n4. Initiate Cancellation: You should see an option labeled '{{Online Order Interaction}}' associated with your purchase. Please select this option to proceed with the cancellation.\n5. Follow Any Additional Steps: The system may request some additional information or confirmation to finalize the cancellation. Please provide the necessary details or respond accordingly.\n\nIf you encounter any difficulties during the cancellation process or have any further questions, our dedicated support team is here to assist you. You can reach us during {{Customer Support Hours}} at {{Customer Support Phone Number}} or through the Live Chat feature on our website at {{Website URL}}. Your satisfaction is our top priority, and we are committed to providing you with the best possible service.",
+    "intent": "cancel_order",
+    "category": "Order"
+  },
+  {
+    "input": "I have to see the early exit fee",
+    "expected_output": "Sure! I can assist you in checking the early exit fee for your account. To do so, please provide me with your account details and I will look it up for you.",
+    "intent": "check_cancellation_fee",
+    "category": "Cancel"
+  },
+  {
+    "input": "I do not know how to see the termination fee",
+    "expected_output": "No problem! I can help you with that. To view the termination fee for your account, you can either log in to our website and go to the account settings, or you can contact our customer service team and they will provide you with the necessary information.",
+    "intent": "check_cancellation_fee",
+    "category": "Cancel"
+  },
+  {
+    "input": "i want help to delete a product from order {{Order Number}}",
+    "expected_output": "We understand that you would like assistance in deleting a product from order number {{Order Number}}. We apologize for any inconvenience caused. To better assist you, could you please provide us with the details of the product you wish to remove from your order? This will help us ensure that the necessary actions are taken promptly. Your satisfaction is our top priority, and we appreciate your patience as we work towards resolving this matter.",
+    "intent": "change_order",
+    "category": "Order"
+  },
+  {
+    "input": "i made a mistake i wanna change purchase {{Order Number}}",
+    "expected_output": "Glad you contacted to us. We completely understand that mistakes happen, and we're here to assist you in changing your purchase with order number #{{Order Number}}. To ensure we provide you with accurate information and guide you through the process, could you please specify the details of the mistake you made in your purchase? This will enable us to offer you the most appropriate solution and ensure you have a satisfactory experience. We appreciate your patience and cooperation in resolving this issue for you.",
+    "intent": "change_order",
+    "category": "Order"
+  },
+  {
+    "input": "can I change order {{Order Number}}?",
+    "expected_output": "Certainly! We understand that you want to make changes to order number {{Order Number}}. We're here to assist you with that. Could you please let us know specifically what changes you would like to make? This will help us provide you with the best possible solution.",
+    "intent": "change_order",
+    "category": "Order"
+  },
+  {
+    "input": "help with cancelling order {{Order Number}}",
+    "expected_output": "I've come to understand that you need assistance with canceling your order for the item with the order number {{Order Number}}. I apologize for any difficulties you're facing and assure you that I'm here to help you through the process. To cancel your order, please follow these steps:\n\n1. Log into your {{Online Company Portal Info}} using your credentials.\n2. Navigate to the '{{Online Order Interaction}}' or '{{Online Order Interaction}}' section, where you can find a record of your purchases.\n3. Look for the specific purchase with the order number {{Order Number}} and click on it to access the order details.\n4. Within the order details page, you should find an option labeled '{{Online Order Interaction}}' or something similar. Please click on it to initiate the cancellation process.\n5. The system may request additional information or ask for confirmation to complete the cancellation. Please provide the necessary details and follow the prompts accordingly.\n\nIf you encounter any issues or have further questions, please don't hesitate to reach out to our customer support team. They are available during {{Customer Support Hours}} at {{Customer Support Phone Number}} or through the Live Chat feature on our website at {{Website URL}}. Your satisfaction is important to us, and we're here to ensure a seamless cancellation process for you.",
+    "intent": "cancel_order",
+    "category": "Order"
+  },
+  {
+    "input": "can I edit purchase {{Order Number}}?",
+    "expected_output": "We understand that you are looking to edit your purchase with the order number {{Order Number}}. We apologize for any inconvenience caused. Our team is here to assist you with any modifications you'd like to make. Could you please provide us with specific details regarding the changes you would like to implement? This will help us provide you with the accurate and personalized support you need. We appreciate your patience and cooperation in this matter.",
+    "intent": "change_order",
+    "category": "Order"
+  },
+  {
+    "input": "can you help me change my shipping address ?",
+    "expected_output": "Absolutely! I can help you with updating your shipping address. Please provide me with your current address and the new address you would like to update it to.",
+    "intent": "change_shipping_address",
+    "category": "Shipping"
+  },
+  {
+    "input": "help seeing the fucking cancellation charges",
+    "expected_output": "Certainly! I can assist you in understanding the cancellation charges. When you cancel your service before the agreed-upon contract term, there might be cancellation fees associated with that. These charges are usually outlined in the terms and conditions of your contract. To get specific information about the cancellation charges for your account, I recommend contacting our customer support team. They will be able to provide you with accurate details based on your specific contract.",
+    "intent": "check_cancellation_fee",
+    "category": "Cancel"
+  },
+  {
+    "input": "i have got to delete an article from purchase {{Order Number}}",
+    "expected_output": "We understand that you need to delete an article from purchase number {{Order Number}}. Our team is here to assist you with this request. Please provide us with the details of the article you would like to remove, such as the name or SKU. This will help us ensure that we take the necessary steps to delete the correct item from your purchase. We appreciate your cooperation and look forward to resolving this for you.",
+    "intent": "change_order",
+    "category": "Order"
+  },
+  {
+    "input": "i need help to change my shipping address",
+    "expected_output": "Unquestionably! I'm here to help you with changing your shipping address. Please provide me with the new address details, and I'll ensure it gets updated for you promptly.",
+    "intent": "change_shipping_address",
+    "category": "Shipping"
+  },
+  {
+    "input": "checking termination charge",
+    "expected_output": "I'm on it! I can help you with checking the termination charge. To do so, you can contact our customer service team or refer to your contract or agreement documents for detailed information about the termination charge applicable to your specific situation.",
+    "intent": "check_cancellation_fee",
+    "category": "Cancel"
+  },
+  {
+    "input": "cancel purchase  {{Order Number}}",
+    "expected_output": "I've realized that you're seeking assistance with canceling the purchase with order number {{Order Number}}. Our team is here to help you navigate through this process smoothly. Here's what you need to do:\n\n1. Access Your Account: Log in to your {{Online Company Portal Info}} using your credentials.\n2. Find Your Order History: Once logged in, locate the '{{Online Order Interaction}}' or '{{Online Order Interaction}}' section.\n3. Identify Your Purchase: Look for the order with the number {{Order Number}} and click on it to view the details.\n4. Initiate Cancellation: Within the order details, you should find an option labeled '{{Online Order Interaction}}' specifically associated with this purchase. Please select it to proceed.\n5. Confirm Cancellation: The system may prompt you to confirm the cancellation. Please provide the necessary confirmation to finalize the process.\n\nIf you encounter any difficulties or have further questions along the way, don't hesitate to contact our dedicated support team. They are available {{Customer Support Hours}} at {{Customer Support Phone Number}} or through the Live Chat feature on our website at {{Website URL}}. We're committed to ensuring your satisfaction and resolving any concerns you may have.",
+    "intent": "cancel_order",
+    "category": "Order"
+  },
+  {
+    "input": "could I check the withdrawal charge?",
+    "expected_output": "Positively! I can help you with the information regarding the withdrawal charge. Please give me a moment to check it for you.",
+    "intent": "check_cancellation_fee",
+    "category": "Cancel"
+  },
+  {
+    "input": "help me modifying purchase {{Order Number}}",
+    "expected_output": "I realized, you need assistance with modifying your purchase with the number {{Order Number}}. We are committed to helping you make the necessary changes to ensure your satisfaction. To better assist you, could you please let me know what specific modifications you would like to make? This way, we can guide you through the process and ensure that your purchase meets your expectations. Your feedback is valuable to us, and we appreciate your patience as we work together to address your concerns.",
+    "intent": "change_order",
+    "category": "Order"
+  },
+  {
+    "input": "how to add an item to order {{Order Number}}?",
+    "expected_output": "We understand that you're looking for guidance on how to add an item to order number {{Order Number}}. We're here to assist you with that. To add an item to your existing order, you can follow these steps: \n1. Log in to your account on our website or mobile app.\n2. Navigate to your orders or order history.\n3. Locate the specific order number ({{Order Number}}) you want to modify.\n4. Click on the order and look for the option to \"Add Item.\"\n5. Select the item you wish to add from our available inventory.\n6. Confirm the addition and proceed with the checkout process if required.\n\nPlease note that the availability of the \"Add Item\" option may depend on the current status of your order. If you encounter any difficulties or have additional questions, our customer support team is available to help you through live chat or phone support. We appreciate your understanding and patience as we assist you in enhancing your order.",
+    "intent": "change_order",
+    "category": "Order"
+  },
+  {
+    "input": "i cannot find anything about the early termination charges",
+    "expected_output": "I apologize for the inconvenience. To find information about the early termination charges, you can try checking the \"Terms and Conditions\" section of your account online. If you are still unable to locate the details, I recommend contacting our customer support team for further assistance. They will be able to provide you with the accurate information regarding the early termination charges.",
+    "intent": "check_cancellation_fee",
+    "category": "Cancel"
+  },
+  {
+    "input": "can you help me checking the early exit fee?",
+    "expected_output": "Sure! To check the early exit fee, please log in to your account and navigate to the \"Fees and Penalties\" section. You will find all the information related to the early exit fee there. Let me know if you need any further assistance.",
+    "intent": "check_cancellation_fee",
+    "category": "Cancel"
+  },
+  {
+    "input": "can uhelp me canceling purchase {{Order Number}}",
+    "expected_output": "I truly understand your need for assistance with canceling your purchase for item {{Order Number}}. We're here to support you through this process. Here's what you can do:\n\n1. Access Your Account: Log in to your {{Online Company Portal Info}} using your credentials.\n2. Locate Your Orders: Once logged in, navigate to the '{{Online Order Interaction}}' or '{{Online Order Interaction}}' section.\n3. Identify the Purchase: Look for the purchase associated with the order number {{Order Number}} and click on it.\n4. Initiate the Cancellation: You will find an option labeled '{{Online Order Interaction}}.' Please select that option.\n5. Confirm the Cancellation: Follow any additional prompts or questions to complete the cancellation process.\n\nIf you encounter any difficulties along the way or have further questions, please don't hesitate to reach out. Our dedicated team is available during {{Customer Support Hours}} at {{Customer Support Phone Number}} or through the Live Chat feature on our {{Website URL}}. We are committed to your satisfaction and aim to provide the support you need.",
+    "intent": "cancel_order",
+    "category": "Order"
+  },
+  {
+    "input": "where can i edit the shipping address",
+    "expected_output": "To edit your shipping address, please follow these steps:\n1. Login to your account on our website.\n2. Go to the \"My Account\" or \"Account Settings\" section.\n3. Look for the \"Shipping Address\" or \"Delivery Address\" option.\n4. Click on it to edit your current address.\n5. Make the necessary changes and save the updated address.\n\nIf you encounter any difficulties, please don't hesitate to reach out to our customer support team for further assistance.",
+    "intent": "change_shipping_address",
+    "category": "Shipping"
+  },
+  {
+    "input": "help with cancelling purchase {{Order Number}}",
+    "expected_output": "I've got that you need assistance with canceling purchase {{Order Number}}. Rest assured, I am here to help you through the process. To cancel your purchase, please follow these steps:\n\n1. Sign into Your Account: Visit our {{Online Company Portal Info}} and sign in using your credentials.\n2. Locate Your Order History: Once logged in, navigate to the '{{Online Order Interaction}}' or '{{Online Order Interaction}}' section.\n3. Find the Relevant Purchase: Look for the purchase associated with the order number {{Order Number}}.\n4. Initiate the Cancellation: Within the order details page, you should see an option labeled '{{Online Order Interaction}}'. Please click on it.\n5. Confirm Your Cancellation: Our system may ask you to confirm the cancellation, providing feedback would be appreciated.\n6. Cancellation Complete: After completing the cancellation process, you will receive a confirmation email.\n\nIf you encounter any difficulties or have further questions along the way, feel free to reach out to our dedicated support team. They are available during {{Customer Support Hours}} at {{Customer Support Phone Number}} or through the Live Chat feature on our {{Website URL}}. We appreciate your trust in us and are committed to ensuring your satisfaction throughout this process.",
+    "intent": "cancel_order",
+    "category": "Order"
+  },
+  {
+    "input": "problem with cancelling purchase {{Order Number}}",
+    "expected_output": "I'm sorry to hear that you're experiencing difficulties with canceling your purchase. I understand the importance of canceling purchase {{Order Number}} for you. Please rest assured that I'm here to help you find a solution. Could you please provide me with more details about the problem you're facing? Once I have a better understanding of the issue, I will be able to assist you further and guide you through the cancellation process.",
+    "intent": "cancel_order",
+    "category": "Order"
+  },
+  {
+    "input": "help canceling purchase {{Order Number}}",
+    "expected_output": "I realized, you're seeking assistance with canceling your purchase with the purchase number {{Order Number}}. Rest assured, I'm here to help guide you through the process.\n\nTo cancel your purchase, follow these steps:\n\n1. Sign in to your {{Online Company Portal Info}} using your credentials.\n2. Navigate to the '{{Online Order Interaction}}' or '{{Online Order Interaction}}' section.\n3. Look for the specific purchase with the order number {{Order Number}}.\n4. Click on the purchase to view the order details.\n5. You should see an option labeled '{{Online Order Interaction}}' associated with your purchase. Please select this option.\n6. A confirmation message will appear. Review the details and follow any additional prompts, if necessary, to complete the cancellation.\n\nIf you encounter any difficulties or have any further questions, our dedicated support team is available to assist you during {{Customer Support Hours}}. Feel free to reach out to us at {{Customer Support Phone Number}} or through the Live Chat feature on our {{Website URL}}. We are committed to providing you with the support you need to ensure your satisfaction.",
+    "intent": "cancel_order",
+    "category": "Order"
+  },
+  {
+    "input": "I can't remove an item from purchase {{Order Number}}",
+    "expected_output": "Thank you for your message to us about the issue you're facing while trying to remove an item from purchase number {{Order Number}}. I apologize for the inconvenience caused. To assist you better, could you please provide more details about the item you wish to remove? Once we have the necessary information, we'll ensure that the item is promptly removed from your purchase. Your satisfaction is our priority, and we'll do our best to resolve this issue for you.",
+    "intent": "change_order",
+    "category": "Order"
+  },
+  {
+    "input": "I do not know what to do to see the early exit penalty",
+    "expected_output": "No problem! To view the early exit penalty, simply log in to your account and navigate to the \"Early Exit Fees\" section. There, you'll find all the information you need about the penalty.",
+    "intent": "check_cancellation_fee",
+    "category": "Cancel"
+  },
+  {
+    "input": "I do not know how to cancel purchase {{Order Number}}",
+    "expected_output": "I realized that you're unsure about how to cancel purchase {{Order Number}}. No need to worry, I'm here to help! To cancel your purchase, please follow these steps:\n\n1. Sign In to Your Account: Access our platform by signing in to your {{Online Company Portal Info}}.\n2. Go to Your Order History: Once logged in, navigate to the '{{Online Order Interaction}}' or '{{Online Order Interaction}}' section.\n3. Locate Your Purchase: Look for the purchase associated with the order number {{Order Number}}. Click on it to view the details.\n4. Initiate the Cancellation: Within the purchase details, you should find an option labeled '{{Online Order Interaction}}'. Please select this.\n5. Follow Any Additional Instructions: The system may prompt you to confirm the cancellation or provide feedback. Kindly complete any further steps as instructed.\n\nIf you encounter any difficulties or have more questions along the way, please don't hesitate to reach out to our dedicated team. We're available during {{Customer Support Hours}} at {{Customer Support Phone Number}} or through the Live Chat on our website at {{Website URL}}. Your satisfaction is our priority, and we'll ensure a smooth cancellation process for you.",
+    "intent": "cancel_order",
+    "category": "Order"
+  },
+  {
+    "input": "where do I cancel purchase {{Order Number}}?",
+    "expected_output": "I've decoded that you're looking for the specific location to cancel your purchase with the order number {{Order Number}}. Let me guide you through the process:\n\n1. **Access Your Account**: Begin by signing into your {{Online Company Portal Info}} with your credentials.\n2. **Go to Order History**: Once logged in, navigate to the '{{Online Order Interaction}}' or '{{Online Order Interaction}}' section.\n3. **Find Your Purchase**: Look for the purchase associated with the order number {{Order Number}}. Click on it to view the details.\n4. **Initiate Cancellation**: In the purchase details, you should find an option labeled '{{Online Order Interaction}}'. Please click on it to start the cancellation process.\n5. **Complete the Process**: Follow any additional on-screen instructions, if prompted, to complete the cancellation.\n\nIf you encounter any difficulties or have further questions, please feel free to reach out to our dedicated support team. You can contact them during {{Customer Support Hours}} at {{Customer Support Phone Number}} or engage in a Live Chat session on our {{Website URL}}. Remember, we are committed to ensuring your satisfaction every step of the way.",
+    "intent": "cancel_order",
+    "category": "Order"
+  },
+  {
+    "input": "I want to modify the address, how can I do it?",
+    "expected_output": "Sure! To modify your address, you can go to your account settings and select the option to edit your shipping address. Alternatively, you can contact our customer support team and provide them with the updated address details. We'll be happy to assist you with the process.",
+    "intent": "change_shipping_address",
+    "category": "Shipping"
+  },
+  {
+    "input": "can you help me updating my shipping address?",
+    "expected_output": "Unquestionably! I'm here to assist you with updating your shipping address. Please provide me with the new address details, and I'll make sure it gets updated in our system.",
+    "intent": "change_shipping_address",
+    "category": "Shipping"
+  },
+  {
+    "input": "I am trying to check the withdrawal charge",
+    "expected_output": "Sure, I can assist you in checking the withdrawal charge. To do so, you can either refer to your account statement where the charges are usually mentioned, or you can reach out to our customer service team for detailed information on withdrawal charges.",
+    "intent": "check_cancellation_fee",
+    "category": "Cancel"
+  },
+  {
+    "input": "i want help tosee the withdrawal fee",
+    "expected_output": "Sure, I can assist you with checking the withdrawal fee. To view the withdrawal fee associated with your account, you can refer to your account statements or contact our customer service team. They will be able to provide you with the specific details regarding the withdrawal fee.",
+    "intent": "check_cancellation_fee",
+    "category": "Cancel"
+  },
+  {
+    "input": "I want help to see the withdrawal penalty",
+    "expected_output": "Sure! If you need assistance in viewing the withdrawal penalty, you can access your account online and go to the \"Withdrawal Policy\" section to find all the relevant information. If you have any further questions, feel free to reach out to our customer support team for assistance.",
+    "intent": "check_cancellation_fee",
+    "category": "Cancel"
+  },
+  {
+    "input": "need help changing some articles  of order {{Order Number}}",
+    "expected_output": "I fathom that you need assistance with changing some articles in your order with number {{Order Number}}. We are here to help you with that. To ensure that we process your request accurately, could you provide specific details about the articles you would like to change? Your input will enable us to make the necessary adjustments and ensure your satisfaction. Thank you for reaching out to us!",
+    "intent": "change_order",
+    "category": "Order"
+  },
+  {
+    "input": "i dont know how  to change my address",
+    "expected_output": "I've realized that you're uncertain about how to change your address. Don't worry, I can assist you with that. To modify your address, you need to log in to your account on our website, go to the \"Account Settings\" section, and look for the \"Shipping Address\" option. From there, you can update your address details. If you encounter any issues or require further guidance, feel free to reach out to our customer support team for assistance.",
+    "intent": "change_shipping_address",
+    "category": "Shipping"
+  },
+  {
+    "input": "I have a problem with cancelling purchase {{Order Number}}",
+    "expected_output": "I've got that you're facing some challenges in canceling purchase {{Order Number}}, and I apologize for any inconvenience caused. Rest assured, I'm here to assist you in resolving this issue.\n\nTo help you with the cancellation process, please follow these steps:\n\n1. Log into your account: Access our platform by signing in to your {{Online Company Portal Info}}.\n2. Navigate to your order history: Once signed in, go to the '{{Online Order Interaction}}' or '{{Online Order Interaction}}' section.\n3. Locate the purchase: Look for the purchase associated with the order number {{Order Number}} and click on it to view the details.\n4. Initiate the cancellation: You should see an option labeled '{{Online Order Interaction}}' or something similar. Please select this to begin the cancellation.\n5. Provide any necessary information: The system may ask you for additional details or feedback to complete the cancellation process. Kindly provide the requested information.\n\nIf you encounter any difficulties or have further questions, our dedicated team is ready to assist you. You can reach out to us during {{Customer Support Hours}} at {{Customer Support Phone Number}} or use the Live Chat feature on our {{Website URL}}.\n\nWe appreciate your patience and understanding throughout this process. Your satisfaction is our top priority, and we'll do everything we can to make sure this issue is resolved to your satisfaction.",
+    "intent": "cancel_order",
+    "category": "Order"
+  },
+  {
+    "input": "i need help to cancel purchase {{Order Number}}",
+    "expected_output": "I can relate to the understanding that you need assistance with canceling your purchase of the product associated with the order number {{Order Number}}. Rest assured, I am here to guide you through this process and resolve any concerns you may have. To cancel your purchase, please follow these steps:\n\n1. Sign in to Your Account: Access our platform by logging in to your {{Online Company Portal Info}} using your credentials.\n2. Locate Your Order History: Once you're signed in, navigate to the '{{Online Order Interaction}}' or '{{Online Order Interaction}}' section.\n3. Find the Relevant Purchase: Look for the order number {{Order Number}} in the list of your previous purchases and click on it to view the details.\n4. Initiate the Cancellation: Within the order details, you will find a '{{Online Order Interaction}}' button. Please click on it to start the cancellation process.\n5. Complete Any Additional Steps: Depending on our system requirements, you may be asked to provide feedback or answer a few questions to confirm the cancellation. Follow the prompts and complete the necessary steps.\n\nIf you encounter any difficulties during the process or have further questions, please don't hesitate to contact our dedicated support team. You can reach us during {{Customer Support Hours}} at {{Customer Support Phone Number}}, or utilize the Live Chat feature on our website at {{Website URL}}. We genuinely appreciate your patience, and we are committed to ensuring your complete satisfaction.",
+    "intent": "cancel_order",
+    "category": "Order"
+  },
+  {
+    "input": "help me updating my shipping address",
+    "expected_output": "Sure! We understand that updating your shipping address is important to ensure your package arrives at the correct location. To begin the process, please log into your account and navigate to the account settings section. From there, you should be able to find the option to update your shipping address. If you encounter any difficulties or have any further questions, feel free to reach out to our customer service team and we'll be more than happy to assist you.",
+    "intent": "change_shipping_address",
+    "category": "Shipping"
+  },
+  {
+    "input": "how could I cancel purchase {{Order Number}}?",
+    "expected_output": "I perceive that you're looking for assistance with canceling purchase {{Order Number}}. Your satisfaction is our top priority, and I'll be happy to assist you with the cancellation process. Here are the steps to follow:\n\n1. Sign In: Log in to your {{Online Company Portal Info}} using your credentials.\n2. Navigate to Order History: Once logged in, locate the section labeled '{{Online Order Interaction}}' or '{{Online Order Interaction}}'.\n3. Find the Purchase: Look for the purchase associated with the order number {{Order Number}}. Click on it to proceed.\n4. Initiate Cancellation: On the purchase details page, you should see an option labeled '{{Online Order Interaction}}'. Please select it.\n5. Confirmation and Feedback: The system might ask you a few questions to confirm the cancellation or gather feedback. Please provide the necessary information.\n\nIf you encounter any difficulties or have further inquiries during the process, our dedicated team is available to assist you. You can reach out to us during {{Customer Support Hours}} at {{Customer Support Phone Number}} or utilize the Live Chat feature on our {{Website URL}}. We appreciate your trust in us and are committed to ensuring your satisfaction.",
+    "intent": "cancel_order",
+    "category": "Order"
+  },
+  {
+    "input": "can you help me cancelling purchase {{Order Number}}?",
+    "expected_output": "I can sense that you're seeking assistance with canceling your purchase with the order number {{Order Number}}. Rest assured, I'm here to help you through the process. To cancel your purchase, please follow these steps:\n\n1. Log into your account: Access our platform by signing in to your {{Company Account}}.\n2. Navigate to your order history: Once signed in, head over to the \"{{Online Order Interaction}}\" or \"{{Online Order Interaction}}\" section.\n3. Find the relevant purchase: Look for the purchase associated with the order number {{Order Number}} and click on it to view the details.\n4. Initiate the cancellation: Within the order details, you should see the option to \"{{Online Order Interaction}}\". Please select this option.\n5. Follow any additional instructions: The system may ask for confirmation or provide further instructions. Please follow them as needed.\n\nIf you encounter any difficulties or have any questions along the way, our dedicated support team is available during {{Customer Support Hours}} at {{Customer Support Phone Number}} or through the Live Chat on our website at {{Website URL}}. We are committed to ensuring your satisfaction and will guide you through the cancellation process with utmost care.",
+    "intent": "cancel_order",
+    "category": "Order"
+  },
+  {
+    "input": "I don't know what I have to do to see the early exit fee",
+    "expected_output": "No problem! To view the early exit fee, you can contact our customer support team or check the terms and conditions section on our website. They will be able to provide you with the necessary information regarding the early exit fee for your account.",
+    "intent": "check_cancellation_fee",
+    "category": "Cancel"
+  },
+  {
+    "input": "want assistance to see the terminatoin charges",
+    "expected_output": "I'll get right on it! I'm here to help you with checking the termination charges. To do so, you can either contact our customer support team or refer to the terms and conditions section on our website. Please let me know if there's anything else I can assist you with.",
+    "intent": "check_cancellation_fee",
+    "category": "Cancel"
+  },
+  {
+    "input": "I chose a wrong address by mistake, I want to modify it",
+    "expected_output": "I apologize for the inconvenience you've experienced with selecting the wrong delivery address. We understand the importance of ensuring accurate shipping information. To correct this issue, please provide us with the correct address so that we can update it for you. Thank you for bringing this to our attention, and we appreciate your understanding.",
+    "intent": "change_shipping_address",
+    "category": "Shipping"
+  },
+  {
+    "input": "deeting something from order {{Order Number}}",
+    "expected_output": "We understand that you would like to remove something from order number {{Order Number}}. We apologize for any inconvenience this may have caused. To better assist you, could you please provide more details about the item you want to remove? This will help us ensure that we accurately modify your order. Thank you for your cooperation!",
+    "intent": "change_order",
+    "category": "Order"
+  },
+  {
+    "input": "want help to deletd a damn article from order {{Order Number}}",
+    "expected_output": "Thanks for dropping us a line to us for help with deleting an article from order number {{Order Number}}. We understand how frustrating it can be when a mistake occurs. To assist you with this, could you please provide the specific details of the article you wish to delete? Once we have the necessary information, we will promptly make the necessary changes to your order.",
+    "intent": "change_order",
+    "category": "Order"
+  },
+  {
+    "input": "need to update my address",
+    "expected_output": "I'll make it happen! I can assist you in modifying your shipping address. Please follow the steps below to update it:\n\n1. Log in to your account on our website.\n2. Navigate to the \"My Account\" or \"Settings\" section.\n3. Find the option to edit your shipping address and click on it.\n4. Enter the new address details accurately.\n5. Save the changes.\n6. Double-check the updated address to ensure its correctness.\n\nIf you encounter any difficulties or have further questions, feel free to reach out to our customer support team. We're here to help!",
+    "intent": "change_shipping_address",
+    "category": "Shipping"
+  },
+  {
+    "input": "help em checking the withdrawal fees",
+    "expected_output": "Assuredly! To assist you with checking the withdrawal fees, please provide me with your account details or login to your account on our website or mobile app. Once logged in, you can navigate to the \"Withdrawal\" section where you will find detailed information about the applicable fees. If you need further assistance, feel free to reach out to our customer support team, who will be more than happy to help you with any queries regarding withdrawal fees.",
+    "intent": "check_cancellation_fee",
+    "category": "Cancel"
+  },
+  {
+    "input": "I have errors trying to pudate my shipping address",
+    "expected_output": "I apologize for the inconvenience you're experiencing while trying to update your shipping address. Our team is here to assist you with resolving this issue. To better assist you, could you please provide more details about the errors you are encountering? This will help us determine the best solution to fix the problem.",
+    "intent": "change_shipping_address",
+    "category": "Shipping"
+  },
+  {
+    "input": "find ionvoice #12588",
+    "expected_output": "Thank you for getting in touch to us regarding your request to find invoice number #{{Invoice Number}}. I understand the importance of locating this specific invoice for you. To assist you further, could you please provide me with any additional details such as the date range or any specific information related to the invoice? This will help me narrow down the search and provide you with accurate assistance. Rest assured, I'm here to guide you every step of the way and ensure your satisfaction.",
+    "intent": "check_invoice",
+    "category": "Invoice"
+  },
+  {
+    "input": "where to see the cancellation fee?",
+    "expected_output": "Sure thing! To find information about the cancellation fee, you can visit our website and navigate to the \"Pricing\" or \"Terms and Conditions\" page. It should be clearly stated in those sections.",
+    "intent": "check_cancellation_fee",
+    "category": "Cancel"
+  },
+  {
+    "input": "assistance to delete an item from purchase {{Order Number}}",
+    "expected_output": "I've understood you're seeking assistance with deleting an item from purchase number {{Order Number}}. Rest assured, we're here to help you with that. To ensure a smooth resolution, could you please provide me with the specific details of the item you would like to delete? This information will allow us to take immediate action and make sure your purchase meets your expectations. Thank you for reaching out, and we appreciate your patience as we work towards resolving this for you.",
+    "intent": "change_order",
+    "category": "Order"
+  },
+  {
+    "input": "I need assistance trying to correct my delivery address",
+    "expected_output": "We're here to help you correct your delivery address! Please provide us with the necessary details, such as your order number and the correct address information, and we will assist you in making the necessary changes.",
+    "intent": "change_shipping_address",
+    "category": "Shipping"
+  },
+  {
+    "input": "I have got to cancel purchase {{Order Number}}, help me",
+    "expected_output": "I'm with you, the urgency of canceling your purchase with order number {{Order Number}}. Rest assured, I'm here to assist you in the cancellation process. Let's go through the necessary steps together:\n\n1. Access Your Account: Begin by logging into your {{Online Company Portal Info}} using your login credentials.\n2. Locate Your Order History: Once you're logged in, navigate to the '{{Online Order Interaction}}' or '{{Online Order Interaction}}' section.\n3. Identify the Specific Purchase: Look for the purchase associated with the order number {{Order Number}} and click on it to access the details.\n4. Initiate the Cancellation: Within the details of the purchase, you'll find a 'Cancel Order' option. Please click on it to start the cancellation process.\n5. Follow the Prompts: The system might ask you a few questions or provide additional instructions to complete the cancellation. Please follow them accordingly.\n\nIf you encounter any difficulties or have further questions, our dedicated customer support team is available during {{Customer Support Hours}} at {{Customer Support Phone Number}} or through our Live Chat feature on our {{Website URL}}. Your satisfaction is our priority, and we'll do everything we can to assist you with your cancellation.",
+    "intent": "cancel_order",
+    "category": "Order"
+  },
+  {
+    "input": "I cannot update purchase {{Order Number}}",
+    "expected_output": "We understand that you're encountering difficulties in updating purchase number {{Order Number}}. We apologize for the inconvenience caused, and we're here to assist you in resolving this issue. To better understand the problem, could you please provide more details about the updates you're trying to make? This will enable us to provide you with the appropriate solution and ensure that your purchase is updated according to your preferences.",
+    "intent": "change_order",
+    "category": "Order"
+  },
+  {
+    "input": "i want assistance to check the invoices from {{Person Name}}",
+    "expected_output": "Thank you for your message to us for help with checking the invoices from {{Salutation}} {{Client Last Name}}. I completely understand your need to locate and review those invoices. To assist you further, could you please provide me with some additional details such as the specific time period or any invoice numbers associated with {{Person Name}}? This information will enable me to locate the invoices more effectively and provide you with the necessary assistance. Rest assured, I'm here to guide you every step of the way.",
+    "intent": "check_invoice",
+    "category": "Invoice"
+  },
+  {
+    "input": "how to locate my bill #12588?",
+    "expected_output": "I'll take care of it! I'm here to assist you with locating your bill with the number #{{Invoice Number}}. To find your invoice, you can follow these steps:\n\n1. Log in to your account on our website.\n2. Navigate to the \"Billing\" or \"Invoices\" section.\n3. Look for the option to search or filter invoices.\n4. Enter the invoice number #{{Invoice Number}} in the search bar.\n5. Click on the search button or press enter.\n\nThese steps should help you locate your specific bill with the number #{{Invoice Number}}. If you encounter any issues or need further assistance, please don't hesitate to let me know.",
+    "intent": "check_invoice",
+    "category": "Invoice"
+  },
+  {
+    "input": "where to check the termination fee?",
+    "expected_output": "To find information about the cancellation fee, you can refer to your booking confirmation or visit our website. The cancellation policy section should provide all the necessary details regarding the fee. If you need further assistance, don't hesitate to reach out to our customer service team. They'll be more than happy to help you.",
+    "intent": "check_cancellation_fee",
+    "category": "Cancel"
+  },
+  {
+    "input": "wanna see the early exit penalty how can i do it",
+    "expected_output": "Certainly! To check the early exit penalty, you can refer to the terms and conditions document provided with your agreement. It will contain all the details regarding the cancellation fees and penalties. If you need any further assistance, please feel free to reach out to our customer service team.",
+    "intent": "check_cancellation_fee",
+    "category": "Cancel"
+  },
+  {
+    "input": "find information abou changing the address",
+    "expected_output": "Sure, I can provide you with information on how to change your address. To update your address, you can log in to your account and navigate to the \"Account Settings\" or \"Profile\" section. From there, you should be able to find an option to edit your address details. If you're unable to locate this option, I recommend reaching out to our customer support team for further assistance. They will be more than happy to help you with the process.",
+    "intent": "change_shipping_address",
+    "category": "Shipping"
+  },
+  {
+    "input": "I don't know what to do to look for my bill from {{Person Name}}",
+    "expected_output": "I see your confusion and uncertainty about locating your bill from {{Person Name}}. I'm here to help you with that. To begin, could you please provide me with any additional details such as the date range, invoice number, or any other relevant information that might assist in searching for your bill? This will enable me to guide you more effectively and ensure a successful resolution.",
+    "intent": "check_invoice",
+    "category": "Invoice"
+  },
+  {
+    "input": "i want help seeing the bill from {{Person Name}}",
+    "expected_output": "For sure! I understand that you need assistance in viewing the bill from {{Salutation}} {{Client Last Name}}. Let's work together to find a solution. Could you please provide me with any additional details, such as the invoice number or date range? This information will help me locate the bill more efficiently and provide you with the necessary support.",
+    "intent": "check_invoice",
+    "category": "Invoice"
+  },
+  {
+    "input": "i don want order {{Order Number}} I'd like to cancel it",
+    "expected_output": "I certainly recognize that you no longer want to proceed with your order with the order number {{Order Number}}. I'm here to assist you in canceling it promptly and smoothly.\n\nTo cancel your order, please follow these steps:\n\n1. Sign in to Your Account: Access our platform by signing in to your {{Online Company Portal Info}}.\n2. Locate Your Order: Navigate to the '{{Online Order Interaction}}' or '{{Online Order Interaction}}' section to find your order.\n3. Select the Order: Look for the specific order with the order number {{Order Number}} and click on it.\n4. Initiate the Cancellation: You should see an option labeled '{{Online Order Interaction}}' associated with your purchase. Please select this to begin the cancellation process.\n5. Confirm the Cancellation: The system may ask you to confirm the cancellation. Follow the prompts and provide any necessary feedback.\n\nIf you encounter any difficulties or have any further questions, our dedicated team is available to assist you during {{Customer Support Hours}}. Feel free to reach out to us at {{Customer Support Phone Number}} or use the Live Chat feature on our {{Website URL}}.\n\nWe appreciate your understanding and apologize for any inconvenience caused.",
+    "intent": "cancel_order",
+    "category": "Order"
+  },
+  {
+    "input": "checking invoice #12588",
+    "expected_output": "Sure! I'm here to help you with checking the invoice with the number #{{Invoice Number}}. To assist you better, could you please provide me with some additional details such as the name of the client or the date range of the invoice? This information will help me locate the invoice more accurately and provide you with the necessary assistance. Thank you for allowing me to assist you in this matter.",
+    "intent": "check_invoice",
+    "category": "Invoice"
+  },
+  {
+    "input": "I want to cancle purchase {{Order Number}}",
+    "expected_output": "I've been there that you want to cancel your purchase with the purchase number {{Order Number}}. We value your decision and would be happy to assist you with the cancellation process. To proceed with the cancellation, please follow these steps:\n\n1. Access Your Account: Log in to your {{Online Company Portal Info}} using your credentials.\n2. Navigate to Your Orders: Once logged in, go to the '{{Online Order Interaction}}' or '{{Online Order Interaction}}' section.\n3. Locate the Purchase: Look for the purchase with the purchase number {{Order Number}} in the list.\n4. Initiate Cancellation: Click on the '{{Cancel Purchase}}' option associated with the purchase.\n5. Confirm Cancellation: Review the cancellation details and confirm your decision.\n\nIf you encounter any difficulties or have additional questions, our dedicated customer support team is available during {{Customer Support Hours}} at {{Customer Support Phone Number}} or through the Live Chat feature on our {{Website URL}}. Please reach out to us, and we'll be glad to assist you further. Your satisfaction is our priority, and we appreciate your trust in us.",
+    "intent": "cancel_order",
+    "category": "Order"
+  },
+  {
+    "input": "how could I swap some products of purchase {{Order Number}}?",
+    "expected_output": "We appreciate you reaching out to us regarding your purchase with order number {{Order Number}} and your desire to swap some products. We understand the importance of ensuring you receive the items that meet your expectations. To facilitate this process, we recommend contacting our customer support team directly. They have the expertise to assist you in making the necessary changes to your purchase. Our team is available {{Customer Support Hours}} at {{Customer Support Phone Number}} or through the Live Chat on our website at {{Website URL}}. They will guide you through the process of swapping the products in your purchase. We value your satisfaction and will do everything we can to ensure your order meets your needs.",
+    "intent": "change_order",
+    "category": "Order"
+  },
+  {
+    "input": "I don't know what I have to do to locate my invoice #37777",
+    "expected_output": "I'm picking up what you're putting down, your confusion about locating your invoice with the number {{Invoice Number}}. Allow me to guide you through the process. To find your invoice, you can start by checking your email for any invoice-related messages. You can also try logging into your account on our website and navigating to the \"Billing\" or \"Invoices\" section, where you should be able to find a list of your invoices along with their corresponding numbers. If you still can't find it, please reach out to our customer support team at {{Customer Support Phone Number}} or through the Live Chat on our website at {{Website URL}}. They will be more than happy to assist you in locating your invoice and clarifying any doubts or questions you may have. Rest assured, we are here to support you every step of the way.",
+    "intent": "check_invoice",
+    "category": "Invoice"
+  },
+  {
+    "input": "I have to locate my invoice #37777",
+    "expected_output": "Definitely! I completely understand your need to locate your invoice with the number #{{Invoice Number}}. Rest assured, I'm here to assist you in finding the information you're looking for. Could you please provide me with some additional details such as the date range or any specific information related to the invoice? This will help me narrow down the search and provide you with accurate results. Thank you for reaching out to us, and I appreciate your patience as we work on resolving this for you.",
+    "intent": "check_invoice",
+    "category": "Invoice"
+  },
+  {
+    "input": "add article to order {{Order Number}}",
+    "expected_output": "Thank you for contacting us regarding your request to add an article to order number {{Order Number}}. I'm here to assist you with that. To ensure an accurate and seamless experience, I need a little more information. Could you please provide the details of the article you would like to add? This will help me to make the necessary arrangements to accommodate your request and update your order accordingly. Let me know how I can further assist you.",
+    "intent": "change_order",
+    "category": "Order"
+  },
+  {
+    "input": "need to see the invoices from {{Person Name}} how do i do it",
+    "expected_output": "I hear you loud and clear your need to view the invoices from {{Salutation}} {{Client Last Name}}, and I'm here to guide you through the process. To access the invoices, you can log in to your account on our website and navigate to the \"Invoices\" or \"Billing\" section. If you're unsure how to proceed or encounter any difficulties, please don't hesitate to ask for further assistance. We are committed to ensuring your satisfaction and will gladly provide the support you need.",
+    "intent": "check_invoice",
+    "category": "Invoice"
+  },
+  {
+    "input": "can I delete several products from order {{Order Number}}?",
+    "expected_output": "We completely understand that you would like to delete several products from order number {{Order Number}}. Our main goal is to ensure your satisfaction with your order, so we are more than happy to assist you with this request. To proceed with the deletion, please provide us with the specific products you would like to remove from your order. This will allow us to promptly make the necessary changes for you. We appreciate your patience and cooperation as we work towards resolving this for you.",
+    "intent": "change_order",
+    "category": "Order"
+  },
+  {
+    "input": "can uhelp me taking a quick look at my invoice #37777",
+    "expected_output": "We've received your message to us for assistance with quickly checking the invoice with the number #{{Invoice Number}}. I completely understand your eagerness to obtain the details of your invoice, as it allows you to keep track of your expenses and maintain a clear financial record. Rest assured, I am here to help you with this. To provide you with prompt and accurate information, could you please confirm your account details, such as your name and email address associated with the invoice? Once we have that information, we can proceed to locate your invoice and assist you further.",
+    "intent": "check_invoice",
+    "category": "Invoice"
+  },
+  {
+    "input": "I do not know what to do to look for the bill #00108",
+    "expected_output": "I get that you're facing some difficulties in locating the bill with the number {{Invoice Number}}. Don't worry, I'm here to help you through this process. To find the bill, you can start by checking your email for any invoices sent to you. If you don't see it in your inbox, please check your spam or junk folder as well. Additionally, you can log in to your account on our website and navigate to the \"Billing\" or \"Invoices\" section to access your bill. If you're unable to find it through these methods, please provide me with your account details or any other relevant information so that I can assist you further. Let's work together to resolve this and ensure you have the information you need.",
+    "intent": "check_invoice",
+    "category": "Invoice"
+  },
+  {
+    "input": "how canI change order {{Order Number}}?",
+    "expected_output": "We appreciate your inquiry on how to make changes to order number {{Order Number}}. To assist you with this, please follow these steps:\n\n1. Log in to your account on our website.\n2. Navigate to the \"Orders\" or \"Order History\" section.\n3. Locate and select the specific order you wish to modify.\n4. Look for an option or button labeled \"Edit\" or \"Modify Order.\"\n5. Click on the \"Edit\" or \"Modify Order\" button to access the order details.\n6. Review the items in your order and make the necessary changes, such as adding or removing items.\n7. Once you have made the desired modifications, confirm the changes and proceed to the checkout page.\n8. Complete the checkout process to finalize your modified order.\n\nIf you encounter any difficulties or have further questions, please feel free to reach out to our customer support team. We're here to assist you every step of the way and ensure your satisfaction.",
+    "intent": "change_order",
+    "category": "Order"
+  },
+  {
+    "input": "I want help seeing the invoices from {{Person Name}}",
+    "expected_output": "Absolutely! I understand your desire to view the invoices from {{Salutation}} {{Client Last Name}}. Let's work together to assist you in accessing the information you need. Could you please provide me with any specific details such as the date range or invoice numbers? This will enable us to locate the invoices quickly and accurately.",
+    "intent": "check_invoice",
+    "category": "Invoice"
+  },
+  {
+    "input": "help switching some products of order {{Order Number}}",
+    "expected_output": "I understood that you need assistance with switching some products in order number {{Order Number}}. I apologize for any inconvenience caused. To better assist you, could you please provide me with the specific products you would like to switch and the desired replacements? This will allow us to expedite the process and ensure that your order meets your expectations. Thank you for your patience and cooperation.",
+    "intent": "change_order",
+    "category": "Order"
+  },
+  {
+    "input": "i want help looking for my bills from {{Person Name}}",
+    "expected_output": "Of course! I understand your need to locate the bills associated with {{Person Name}}. Rest assured, I'm here to assist you in finding the information you seek. To better assist you, could you please provide me with any relevant details such as a date range or any specific invoice numbers? This will allow me to narrow down the search and provide you with accurate and timely information. Thank you!",
+    "intent": "check_invoice",
+    "category": "Invoice"
+  },
+  {
+    "input": "chck bill from {{Person Name}}",
+    "expected_output": "I genuinely appreciate your request to check the bill from {{Salutation}} {{Client Last Name}}. I understand the importance of finding this information for you. To proceed further, could you please provide me with any additional details such as the date range or any specific items or services mentioned in the bill? With these details, I will be able to assist you more efficiently and find the bill you are looking for. Rest assured, I am here to help you every step of the way.",
+    "intent": "check_invoice",
+    "category": "Invoice"
+  },
+  {
+    "input": "can uhelp me to delete an item from purchase {{Order Number}}",
+    "expected_output": "We appreciate your reaching out to us for assistance with deleting an item from purchase number #{{Order Number}}. We understand the importance of getting your order just right. To help us assist you better, could you please provide us with the specific item you would like to delete? Our team is here to ensure your satisfaction and make the necessary adjustments to your order. Let us know, and we'll take care of it promptly for you.",
+    "intent": "change_order",
+    "category": "Order"
+  },
+  {
+    "input": "there are issues trying to update the goddamn address",
+    "expected_output": "We apologize for the difficulties you are experiencing while trying to update your address. Our team is here to help resolve this issue for you. Please provide us with the necessary details, such as your current address and the new address you would like to update it to, and we will assist you in making the necessary changes.",
+    "intent": "change_shipping_address",
+    "category": "Shipping"
+  },
+  {
+    "input": "can you help me correct my delivery address?",
+    "expected_output": "Sure! I'm here to assist you with correcting your delivery address. Please provide me with the necessary details, such as your current address and the correct address you would like to change it to, and I'll guide you through the process.",
+    "intent": "change_shipping_address",
+    "category": "Shipping"
+  },
+  {
+    "input": "I need help to correct the delivery address",
+    "expected_output": "I'll make it happen! I'm here to assist you with correcting your delivery address. Please provide me with the current address and the correct address you'd like to update it to, and I'll make sure it gets corrected for you.",
+    "intent": "change_shipping_address",
+    "category": "Shipping"
+  },
+  {
+    "input": "I do not knw how I can locate the bills from {{Person Name}}",
+    "expected_output": "I'm clearly cognizant your need for assistance in locating the bills from {{Client First Name}} {{Client Last Name}}. To help you with this, I would recommend reaching out to our customer support team. They have access to all the necessary tools and information to assist you in locating your bills. They are available {{Customer Support Hours}} at {{Customer Support Phone Number}} or through the Live Chat on our website at {{Website URL}}. By providing them with your account details, they will be able to guide you through the process and help you find the specific bills you are looking for.",
+    "intent": "check_invoice",
+    "category": "Invoice"
+  },
+  {
+    "input": "withdrawal hcarge",
+    "expected_output": "I apologize, but I couldn't find any information regarding a specific withdrawal charge. However, there might be applicable fees and charges for early termination or cancellation of services. To get accurate details about potential withdrawal fees, I recommend contacting our customer support team directly. They will be able to provide you with the most up-to-date information regarding any charges associated with withdrawing from our services.",
+    "intent": "check_cancellation_fee",
+    "category": "Cancel"
+  },
+  {
+    "input": "help trying to modify the damn address",
+    "expected_output": "I've realized that you're having trouble modifying your address. I apologize for any frustration caused. Rest assured, I'm here to assist you with making the necessary changes. Please provide me with the current and correct address details, and I'll ensure it is updated in our system promptly.",
+    "intent": "change_shipping_address",
+    "category": "Shipping"
+  },
+  {
+    "input": "I need help to locate my bills from {{Person Name}}",
+    "expected_output": "I get it your need to locate your bills from {{Salutation}} {{Client Last Name}}. It can be challenging to find specific invoices, but I'm here to guide you through the process. To begin, may I ask if you have any specific details to narrow down the search, such as a date range or any relevant information related to the bills? Providing these details will greatly assist me in locating the information you need.",
+    "intent": "check_invoice",
+    "category": "Invoice"
+  },
+  {
+    "input": "I cannot find the withdrawal penalty, could you help me?",
+    "expected_output": "Sure! To check the withdrawal penalty, please log in to your account and navigate to the \"Fees and Charges\" section. There, you should be able to find all the information regarding the withdrawal fees for your specific account. If you need any further assistance, feel free to reach out to our customer support team.",
+    "intent": "check_cancellation_fee",
+    "category": "Cancel"
+  },
+  {
+    "input": "how can I locate the invoice #37777?",
+    "expected_output": "I certainly recognize your confusion about locating the invoice with the number #{{Invoice Number}}. Let's work together to find a solution. To locate the invoice, you can try accessing your online account on our website and navigating to the \"Invoices\" section. If you're unable to find it there, I recommend contacting our customer support team at {{Customer Support Phone Number}} or through our Live Chat on our website. They will be able to assist you further in locating the invoice and providing you with the necessary information. Rest assured, we're here to guide you every step of the way.",
+    "intent": "check_invoice",
+    "category": "Invoice"
+  },
+  {
+    "input": "switch several items of order {{Order Number}}",
+    "expected_output": "Thank you for contacting us regarding your request to switch several items in order number #{{Order Number}}. We understand the importance of getting your order just right. In order to assist you further, could you please provide us with the specific items that you would like to switch? This information will allow us to make the necessary arrangements and ensure your complete satisfaction with your purchase. We appreciate your patience and cooperation as we work towards resolving this matter for you.",
+    "intent": "change_order",
+    "category": "Order"
+  },
+  {
+    "input": "I need to give a quick look at invoice #85632, help me",
+    "expected_output": "I see what you mean your urgency to quickly view the invoice with the number #{{Invoice Number}}. Let me guide you through the process. To access your invoice, you can visit our website and log into your account. Once logged in, go to the \"Invoices\" section, where you should be able to find the invoice with the number #{{Invoice Number}}. If you encounter any difficulties or need further assistance, please don't hesitate to let me know.",
+    "intent": "check_invoice",
+    "category": "Invoice"
+  },
+  {
+    "input": "could you tell me more about changing the delivery address?",
+    "expected_output": "I'm happy to help! If you need to change your delivery address, we can definitely assist you with that. Simply provide us with the new address details, and we will update it for you. It's important to note that if your order has already been shipped, we might not be able to make any changes to the address. However, we can always try our best to help you out. Just let us know what changes you need, and we'll take care of it for you.",
+    "intent": "change_shipping_address",
+    "category": "Shipping"
+  },
+  {
+    "input": "i have made a mistake  help me modify purchase {{Order Number}}",
+    "expected_output": "We understand that mistakes happen, and we're here to help you modify your purchase order number {{Order Number}}. Please provide us with the specific changes you would like to make, and we'll do our best to assist you in rectifying the mistake. Your satisfaction is our top priority, and we appreciate your patience and understanding while we work on this for you.",
+    "intent": "change_order",
+    "category": "Order"
+  },
+  {
+    "input": "how can i give a quick lookat my bill #37777",
+    "expected_output": "I understand your need to quickly look at your bill with the number #{{Invoice Number}}. To access your bill, you can log in to your account on our website and navigate to the \"Billing\" or \"Invoices\" section. There, you should be able to find and view your bill with the specified number. If you encounter any difficulties or have further questions, please don't hesitate to let me know. I'm here to assist you every step of the way.",
+    "intent": "check_invoice",
+    "category": "Invoice"
+  },
+  {
+    "input": "wanna look for the bill #85632 how do i do it",
+    "expected_output": "Thank you for reaching out! I completely understand your need to locate your bill with the number #{{Invoice Number}}. Let me guide you through the process. To find your bill, you can log in to your account on our website and navigate to the \"Billing\" section. Alternatively, you can contact our customer support team at {{Customer Support Phone Number}} or through the Live Chat on our website at {{Website URL}}. They will be more than happy to assist you in locating your bill and providing any additional information you may need. Remember, we are here to support you every step of the way!",
+    "intent": "check_invoice",
+    "category": "Invoice"
+  },
+  {
+    "input": "how to change something of order {{Order Number}}",
+    "expected_output": "I grasp that you would like to change something in your order with the number {{Order Number}}. We're here to assist you with this. Could you please provide more details about what exactly you would like to change? It could be the quantity of an item, the size, or any other specific modification you have in mind. By understanding your specific request, we can ensure that we provide accurate guidance to address your needs effectively.",
+    "intent": "change_order",
+    "category": "Order"
+  },
+  {
+    "input": "what do i need to do to see the bill from {{Person Name}}",
+    "expected_output": "I'll get right on it! I understand your eagerness to access the bill from {{Person Name}}. To view the bill, you can log in to your account on our website and navigate to the \"Billing\" or \"Account History\" section. Alternatively, you can contact our customer support team at {{Customer Support Phone Number}} or through the Live Chat on our website at {{Website URL}}. They will be more than happy to assist you in retrieving the bill and addressing any specific concerns or questions you may have.",
+    "intent": "check_invoice",
+    "category": "Invoice"
+  },
+  {
+    "input": "I need help locating my bill #85632",
+    "expected_output": "I've understood that you require assistance in locating your bill with the number #{{Invoice Number}}. I'm here to help! Could you please provide me with some additional information, such as the date range or any specific details related to the bill? This will enable me to assist you more effectively and expedite the search process. Rest assured, I'm committed to helping you find the information you need.",
+    "intent": "check_invoice",
+    "category": "Invoice"
+  },
+  {
+    "input": "I do not know how to give a quick look at my bill #00108",
+    "expected_output": "I get it your uncertainty about how to quickly check the details of your bill with the number #{{Invoice Number}}. It's important to have easy access to such information. To give you a quick look at your bill, you can try logging into your account on our website and navigating to the 'Invoice' section. If you're having trouble finding it, I can provide step-by-step instructions or guide you through the process. Just let me know how I can assist you further. Remember, I'm here to support you and ensure you have a seamless experience.",
+    "intent": "check_invoice",
+    "category": "Invoice"
+  },
+  {
+    "input": "where do I locate my invoice #12588?",
+    "expected_output": "Sure! I'm here to guide you in locating your invoice with the number #{{Invoice Number}}. To find it, you can go to your account dashboard and look for the \"Invoices\" or \"Billing\" section. Alternatively, you can contact our customer support team at {{Customer Support Phone Number}} or through the Live Chat on our website at {{Website URL}}. They will be more than happy to assist you in finding the specific invoice you're looking for.",
+    "intent": "check_invoice",
+    "category": "Invoice"
+  },
+  {
+    "input": "i need assistance giving a quick look at the invoice #12588",
+    "expected_output": "I comprehend your need for quick assistance in reviewing the invoice with number #{{Invoice Number}}. Allow me to guide you through the process and help you find the necessary information. Could you please provide me with any additional details or specific questions you have regarding the invoice? This will enable me to give you a more accurate and tailored response. Rest assured, I'm here to ensure your experience is seamless and efficient.",
+    "intent": "check_invoice",
+    "category": "Invoice"
+  },
+  {
+    "input": "I don't know how I can cancel purchase {{Order Number}}",
+    "expected_output": "I'm with you, your confusion about canceling your purchase with the order number {{Order Number}}. Rest assured, I'm here to help you with the process. Here's what you need to do:\n\n1. Sign into Your Account: Access our platform by logging into your {{Online Company Portal Info}}.\n2. Locate the Order Section: Once logged in, navigate to the '{{Online Order Interaction}}' or '{{Online Order Interaction}}' tab.\n3. Identify Your Purchase: Look for the purchase associated with the order number {{Order Number}}. Click on it to view the details.\n4. Start the Cancellation: You'll find an option labeled '{{Online Order Interaction}}' next to your purchase. Please select it.\n5. Follow Any Additional Steps: The system may require some additional information or ask for feedback to complete the cancellation process. Please follow the instructions provided.\n\nIf you encounter any difficulties or have further questions along the way, our dedicated team is available to assist you. Reach out to us during {{Customer Support Hours}} at {{Customer Support Phone Number}} or utilize the Live Chat feature on our {{Website URL}}. Your satisfaction is our top priority, and we're committed to resolving this for you.",
+    "intent": "cancel_order",
+    "category": "Order"
+  },
+  {
+    "input": "I would like to see the termination charges",
+    "expected_output": "I'm on it! To view the termination charges, you can access your account on our website. Once logged in, navigate to the \"Billing\" section, where you will find a detailed breakdown of any termination fees associated with your plan. If you have any further questions or need assistance, feel free to reach out to our customer support team.",
+    "intent": "check_cancellation_fee",
+    "category": "Cancel"
+  },
+  {
+    "input": "I do not know what I need to do to look for the bill #85632",
+    "expected_output": "I've decoded that you're unsure about how to look for the bill with the number #{{Invoice Number}}. Allow me to guide you through the process. To locate your bill, you can visit our website and log in to your account. Once logged in, navigate to the billing section, where you should find an option to view your bills. If you're facing any difficulties or need further assistance, please don't hesitate to let me know.",
+    "intent": "check_invoice",
+    "category": "Invoice"
+  },
+  {
+    "input": "wanna see the bill from {{Person Name}}",
+    "expected_output": "I'll get right on it! I understand your desire to view the bill from {{Salutation}} {{Client Last Name}}. To assist you better, could you please provide me with the following information? \n1. The date range for the bill you wish to see.\n2. Any specific details about the bill, such as the invoice number or any relevant notes.\nOnce I have this information, I'll be able to guide you through the process seamlessly.",
+    "intent": "check_invoice",
+    "category": "Invoice"
+  },
+  {
+    "input": "I have to locate my damn bills from {{Person Name}}",
+    "expected_output": "I understand your urgency in locating your bills associated with {{Salutation}} {{Client Last Name}}. Rest assured, I will do my utmost to assist you. To proceed, could you please provide me with {{additional details}}, such as the {{month}}, {{year}}, or any other relevant information about the bills you are searching for? This will enable me to narrow down the search and help you find the necessary details more efficiently. Thank you for your cooperation!",
+    "intent": "check_invoice",
+    "category": "Invoice"
+  },
+  {
+    "input": "can you help me seeing the invoice from {{Person Name}}?",
+    "expected_output": "Of course! I understand that you need assistance in viewing the invoice from {{Salutation}} {{Client Last Name}}. It's great that you reached out to us for help. To proceed further and provide you with the accurate invoice details, could you please provide me with the {{Date Range}} or any other relevant information that you might have? I'm here to guide you every step of the way and ensure that you have a seamless experience.",
+    "intent": "check_invoice",
+    "category": "Invoice"
+  },
+  {
+    "input": "I need help to see the cancellation fee",
+    "expected_output": "Positively! To check the cancellation fee, please log in to your account and navigate to the \"Fees and Charges\" section. You will find detailed information about any cancellation fees applicable to your account. If you have any further questions, feel free to ask.",
+    "intent": "check_cancellation_fee",
+    "category": "Cancel"
+  },
+  {
+    "input": "I need to look for the fucking invoices from {{Person Name}}",
+    "expected_output": "I see your urgency to locate the invoices from {{Salutation}} {{Client Last Name}}. I apologize for any inconvenience you may have experienced. To assist you better, could you please provide me with any additional information such as the date range or any other specific details related to the invoices? Rest assured, I'm here to support you throughout this process, and together, we'll find a solution.",
+    "intent": "check_invoice",
+    "category": "Invoice"
+  }
+]

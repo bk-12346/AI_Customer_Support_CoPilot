@@ -77,7 +77,8 @@ async function fetchAllRows<T>(datasetName: string, maxRows: number = 50000): Pr
   const pageSize = 100;
   let offset = 0;
   let consecutiveErrors = 0;
-  const maxConsecutiveErrors = 3;
+  const maxConsecutiveErrors = 5;
+  let rateLimitBackoff = 1000; // Start with 1 second for rate limit backoff
 
   console.log(`  Fetching rows from ${datasetName}...`);
 
@@ -91,6 +92,28 @@ async function fetchAllRows<T>(datasetName: string, maxRows: number = 50000): Pr
           console.log(`  Reached end of dataset at offset ${offset}`);
           break;
         }
+        
+        // Handle rate limiting (429) with exponential backoff
+        if (response.status === 429) {
+          const retryAfter = response.headers.get('Retry-After');
+          const waitTime = retryAfter ? parseInt(retryAfter) * 1000 : rateLimitBackoff;
+          
+          console.warn(`  Rate limited (429) at offset ${offset}. Waiting ${waitTime / 1000}s before retry...`);
+          await new Promise(resolve => setTimeout(resolve, waitTime));
+          
+          // Exponential backoff: double the wait time for next rate limit
+          rateLimitBackoff = Math.min(rateLimitBackoff * 2, 60000); // Cap at 60 seconds
+          consecutiveErrors++;
+          
+          if (consecutiveErrors >= maxConsecutiveErrors) {
+            console.error(`  Too many rate limit errors. Stopping at ${rows.length} rows.`);
+            break;
+          }
+          
+          // Don't increment offset, retry the same request
+          continue;
+        }
+        
         throw new Error(`API error: ${response.status}`);
       }
 
@@ -104,13 +127,14 @@ async function fetchAllRows<T>(datasetName: string, maxRows: number = 50000): Pr
       rows.push(...data.rows.map(r => r.row));
       offset += pageSize;
       consecutiveErrors = 0; // Reset on success
+      rateLimitBackoff = 1000; // Reset backoff on success
 
       if (offset % 1000 === 0) {
         console.log(`  Fetched ${rows.length} rows...`);
       }
 
-      // Small delay to avoid rate limiting
-      await new Promise(resolve => setTimeout(resolve, 100));
+      // Increased delay to avoid rate limiting (500ms instead of 100ms)
+      await new Promise(resolve => setTimeout(resolve, 500));
 
     } catch (error) {
       consecutiveErrors++;
@@ -129,8 +153,10 @@ async function fetchAllRows<T>(datasetName: string, maxRows: number = 50000): Pr
         break;
       }
 
-      // Wait before retry
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      // Exponential backoff for other errors
+      const waitTime = Math.min(1000 * Math.pow(2, consecutiveErrors - 1), 30000);
+      console.log(`  Waiting ${waitTime / 1000}s before retry...`);
+      await new Promise(resolve => setTimeout(resolve, waitTime));
     }
   }
 
