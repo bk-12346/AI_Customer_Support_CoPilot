@@ -71,3 +71,23 @@ export type {
   ContextAssemblyOptions,
   BuildContextOptions,
 } from "./context";
+
+// ===========================================
+// Prompt Templates
+// ===========================================
+export {
+  SYSTEM_PROMPT,
+  SYSTEM_PROMPT_FORMAL,
+  SYSTEM_PROMPT_EMPATHETIC,
+  buildUserPrompt,
+  buildMessages,
+  buildLowConfidenceMessages,
+  buildRegenerationMessages,
+  estimateTokenCount,
+  fitsWithinLimit,
+} from "./prompts";
+
+// ===========================================
+// Prompt Types
+// ===========================================
+export type { ChatMessage, PromptOptions } from "./prompts";
