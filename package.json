@@ -7,11 +7,13 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "process-data": "npx tsx scripts/process-datasets.ts"
+    "process-data": "npx tsx scripts/process-datasets.ts",
+    "seed-kb": "npx tsx scripts/seed-kb.ts"
   },
   "dependencies": {
     "@supabase/ssr": "^0.8.0",
     "@supabase/supabase-js": "^2.90.0",
+    "dotenv": "^17.2.3",
     "next": "16.1.1",
     "openai": "^6.16.0",
     "parquet-wasm": "^0.7.1",
