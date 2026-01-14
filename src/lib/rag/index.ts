@@ -1,28 +1,29 @@
 /**
  * RAG (Retrieval-Augmented Generation) Module
  *
- * Provides semantic search and retrieval capabilities for:
+ * Provides semantic search, retrieval, and context assembly for:
  * - Knowledge base articles
  * - Similar resolved tickets
  * - Ticket conversation history
+ * - LLM prompt context building
  *
  * @example
  * ```typescript
  * import {
- *   searchKnowledgeBase,
- *   searchSimilarTickets,
- *   getTicketWithMessages,
- *   formatKnowledgeContext
+ *   buildFullContext,
+ *   calculateConfidence
  * } from "@/lib/rag";
  *
- * // Search knowledge base
- * const kbResults = await searchKnowledgeBase(
+ * // Build full context for a customer query
+ * const context = await buildFullContext(
  *   "How do I reset my password?",
  *   organizationId
  * );
  *
- * // Format for LLM prompt
- * const context = formatKnowledgeContext(kbResults);
+ * // Use in your LLM prompt
+ * console.log(context.systemContext);
+ * console.log(`Sources: ${context.sources.length}`);
+ * console.log(`Confidence: ${calculateConfidence(context)}`);
  * ```
  */
 
@@ -38,7 +39,17 @@ export {
 } from "./retrieval";
 
 // ===========================================
-// Types
+// Context Assembly Functions
+// ===========================================
+export {
+  assembleContext,
+  buildFullContext,
+  calculateConfidence,
+  formatSourcesForDisplay,
+} from "./context";
+
+// ===========================================
+// Retrieval Types
 // ===========================================
 export type {
   KnowledgeSearchOptions,
@@ -48,3 +59,15 @@ export type {
   TicketWithMessages,
   TicketMessage,
 } from "./retrieval";
+
+// ===========================================
+// Context Types
+// ===========================================
+export type {
+  SourceReference,
+  SimilarTicketContext,
+  RetrievedContext,
+  AssembledContext,
+  ContextAssemblyOptions,
+  BuildContextOptions,
+} from "./context";
