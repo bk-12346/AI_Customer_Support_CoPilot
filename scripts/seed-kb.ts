@@ -59,6 +59,26 @@ function validateEnv(): { supabaseUrl: string; supabaseKey: string; openaiKey: s
   if (!supabaseUrl) {
     throw new Error("NEXT_PUBLIC_SUPABASE_URL is not set in environment");
   }
+  // Supabase JS expects the project API URL like: https://<project-ref>.supabase.co
+  // If this is accidentally set to Supabase Studio/Dashboard (supabase.com), requests will return HTML.
+  try {
+    const u = new URL(supabaseUrl);
+    const host = u.hostname.toLowerCase();
+    if (host.endsWith("supabase.com")) {
+      throw new Error(
+        `NEXT_PUBLIC_SUPABASE_URL appears to be a Supabase dashboard URL (${supabaseUrl}). ` +
+          `Set it to your project API URL: https://<project-ref>.supabase.co`
+      );
+    }
+    if (!host.endsWith("supabase.co") && !host.includes("localhost")) {
+      console.warn(
+        `  Warning: NEXT_PUBLIC_SUPABASE_URL host (${host}) doesn't look like a Supabase project API URL. ` +
+          `Expected https://<project-ref>.supabase.co (or local dev).`
+      );
+    }
+  } catch (e) {
+    if (e instanceof Error) throw e;
+  }
   if (!supabaseKey) {
     throw new Error("SUPABASE_SERVICE_ROLE_KEY is not set in environment");
   }
@@ -131,11 +151,22 @@ async function getOrCreateTestOrg(
   supabase: ReturnType<typeof createSupabaseAdmin>
 ): Promise<string> {
   // Check if test org exists
-  const { data: existingOrg } = await supabase
+  const { data: existingOrg, error: existingOrgError } = await supabase
     .from("organizations")
     .select("id")
     .eq("slug", TEST_ORG_SLUG)
     .single();
+
+  // If the org isn't found, Supabase may return an error (e.g., PGRST116)
+  // We only treat it as fatal if we got an error AND no data.
+  if (existingOrgError && !existingOrg) {
+    console.error("  Failed to query organizations table:", {
+      message: existingOrgError.message,
+      details: (existingOrgError as any).details,
+      hint: (existingOrgError as any).hint,
+      code: (existingOrgError as any).code,
+    });
+  }
 
   if (existingOrg) {
     console.log(`  Using existing organization: ${TEST_ORG_NAME} (${existingOrg.id})`);
@@ -153,6 +184,12 @@ async function getOrCreateTestOrg(
     .single();
 
   if (error) {
+    console.error("  Failed to create test organization:", {
+      message: error.message,
+      details: (error as any).details,
+      hint: (error as any).hint,
+      code: (error as any).code,
+    });
     throw new Error(`Failed to create test organization: ${error.message}`);
   }
 
