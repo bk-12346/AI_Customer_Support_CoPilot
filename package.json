@@ -8,7 +8,10 @@
     "start": "next start",
     "lint": "eslint",
     "process-data": "npx tsx scripts/process-datasets.ts",
-    "seed-kb": "npx tsx scripts/seed-kb.ts"
+    "seed-kb": "npx tsx scripts/seed-kb.ts",
+    "test-pipeline": "npx tsx scripts/test-pipeline.ts",
+    "test-pipeline:quick": "npx tsx scripts/test-pipeline.ts --quick",
+    "test-pipeline:full": "npx tsx scripts/test-pipeline.ts --full"
   },
   "dependencies": {
     "@supabase/ssr": "^0.8.0",
