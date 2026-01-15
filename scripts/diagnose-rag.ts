@@ -16,8 +16,16 @@ import { createClient, SupabaseClient } from "@supabase/supabase-js";
 dotenv.config({ path: ".env.local" });
 dotenv.config({ path: ".env" });
 
-// Import from source files using relative paths
-import { generateEmbedding } from "../src/lib/openai/embeddings";
+/**
+ * IMPORTANT:
+ * Load dotenv BEFORE importing app modules that read env vars at import time.
+ * We use a dynamic import for embeddings to avoid OpenAI client initialization
+ * happening before dotenv runs.
+ */
+async function loadEmbeddingModule() {
+  const mod = await import("../src/lib/openai/embeddings");
+  return { generateEmbedding: mod.generateEmbedding };
+}
 
 // ===========================================
 // Types
@@ -204,6 +212,7 @@ async function testThresholds(
   query: string,
   organizationId: string
 ): Promise<ThresholdResult[]> {
+  const { generateEmbedding } = await loadEmbeddingModule();
   console.log(`\nGenerating embedding for: "${query}"...`);
   const { embedding } = await generateEmbedding(query);
 
@@ -239,6 +248,7 @@ async function testQueryCoverage(
   organizationId: string,
   threshold: number = 0.5
 ): Promise<QueryCoverageResult[]> {
+  const { generateEmbedding } = await loadEmbeddingModule();
   const results: QueryCoverageResult[] = [];
 
   for (const query of queries) {
