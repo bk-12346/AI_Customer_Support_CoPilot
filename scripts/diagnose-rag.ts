@@ -36,7 +36,7 @@ interface KBArticle {
   title: string;
   content: string;
   source: string;
-  category?: string;
+  labels?: string[];
   created_at: string;
 }
 
@@ -126,7 +126,7 @@ async function getKBArticles(organizationId: string): Promise<KBArticle[]> {
 
   const { data, error } = await supabase
     .from("knowledge_articles")
-    .select("id, title, content, source, category, created_at")
+    .select("id, title, content, source, labels, created_at")
     .eq("organization_id", organizationId)
     .order("created_at", { ascending: false });
 
@@ -142,17 +142,23 @@ async function getKBArticles(organizationId: string): Promise<KBArticle[]> {
  */
 function analyzeKBCoverage(articles: KBArticle[]): {
   total: number;
-  categories: Record<string, number>;
+  labels: Record<string, number>;
   sources: Record<string, number>;
   sampleTitles: string[];
 } {
-  const categories: Record<string, number> = {};
+  const labels: Record<string, number> = {};
   const sources: Record<string, number> = {};
 
   for (const article of articles) {
-    // Count by category
-    const category = article.category || "uncategorized";
-    categories[category] = (categories[category] || 0) + 1;
+    // Count by labels
+    const articleLabels = article.labels || [];
+    if (articleLabels.length === 0) {
+      labels["unlabeled"] = (labels["unlabeled"] || 0) + 1;
+    } else {
+      for (const label of articleLabels) {
+        labels[label] = (labels[label] || 0) + 1;
+      }
+    }
 
     // Count by source
     sources[article.source] = (sources[article.source] || 0) + 1;
@@ -160,7 +166,7 @@ function analyzeKBCoverage(articles: KBArticle[]): {
 
   return {
     total: articles.length,
-    categories,
+    labels,
     sources,
     sampleTitles: articles.slice(0, 10).map((a) => a.title),
   };
@@ -300,12 +306,12 @@ function printKBCoverage(coverage: ReturnType<typeof analyzeKBCoverage>): void {
   console.log("\nKB Article Coverage:");
   console.log(`  Total articles: ${coverage.total}`);
 
-  if (Object.keys(coverage.categories).length > 0) {
-    console.log("\n  By category:");
-    for (const [category, count] of Object.entries(coverage.categories).sort(
+  if (Object.keys(coverage.labels).length > 0) {
+    console.log("\n  By label:");
+    for (const [label, count] of Object.entries(coverage.labels).sort(
       (a, b) => b[1] - a[1]
     )) {
-      console.log(`    - ${category}: ${count}`);
+      console.log(`    - ${label}: ${count}`);
     }
   }
 
