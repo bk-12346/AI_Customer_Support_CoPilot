@@ -9,7 +9,8 @@
  * import {
  *   generateDraft,
  *   needsHumanReview,
- *   getConfidenceLevel
+ *   getConfidenceLevel,
+ *   calculateConfidence
  * } from "@/lib/ai";
  *
  * // Generate a draft response
@@ -25,13 +26,15 @@
  *   console.log("Draft needs human review");
  * }
  *
- * // Get confidence level
- * console.log(`Confidence: ${getConfidenceLevel(draft.confidenceScore)}`);
+ * // Access confidence details
+ * console.log(`Confidence: ${draft.confidenceLevel}`);
+ * console.log(`Explanation: ${draft.confidenceExplanation}`);
+ * console.log(`Factors: ${JSON.stringify(draft.metadata.confidenceFactors)}`);
  * ```
  */
 
 // ===========================================
-// Main Functions
+// Draft Generation
 // ===========================================
 export {
   generateDraft,
@@ -40,7 +43,19 @@ export {
 } from "./generate-draft";
 
 // ===========================================
-// Types
+// Confidence Scoring
+// ===========================================
+export {
+  calculateConfidence,
+  getConfidenceExplanation,
+  shouldFlagForReview,
+  getConfidenceSummary,
+  CONFIDENCE_WEIGHTS,
+  CONFIDENCE_THRESHOLDS,
+} from "./confidence";
+
+// ===========================================
+// Draft Types
 // ===========================================
 export type {
   DraftInput,
@@ -48,3 +63,12 @@ export type {
   DraftSource,
   DraftMetadata,
 } from "./generate-draft";
+
+// ===========================================
+// Confidence Types
+// ===========================================
+export type {
+  ConfidenceFactors,
+  ConfidenceResult,
+  ConfidenceParams,
+} from "./confidence";

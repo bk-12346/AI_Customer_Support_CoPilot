@@ -23,10 +23,17 @@
  * ```
  */
 
-import { buildFullContext, buildMessages, calculateConfidence } from "@/lib/rag";
-import type { AssembledContext, SourceReference, PromptOptions } from "@/lib/rag";
+import { buildFullContext, buildMessages } from "@/lib/rag";
+import type { AssembledContext, PromptOptions } from "@/lib/rag";
 import { generateCompletion } from "@/lib/openai";
 import type { ChatCompletionOptions } from "@/lib/openai/chat";
+import {
+  calculateConfidence as calculateConfidenceScore,
+  getConfidenceLevel,
+  shouldFlagForReview,
+  type ConfidenceResult,
+  type ConfidenceFactors,
+} from "./confidence";
 
 // ===========================================
 // Types
@@ -82,6 +89,8 @@ export interface DraftMetadata {
     completion: number;
     total: number;
   };
+  /** Detailed confidence factors */
+  confidenceFactors?: ConfidenceFactors;
 }
 
 /**
@@ -92,6 +101,12 @@ export interface DraftOutput {
   content: string;
   /** Confidence score (0-1) based on retrieved context */
   confidenceScore: number;
+  /** Human-readable confidence level */
+  confidenceLevel: "high" | "medium" | "low";
+  /** Human-readable confidence explanation */
+  confidenceExplanation: string;
+  /** Whether this draft needs human review */
+  needsReview: boolean;
   /** Sources used to generate the response */
   sources: DraftSource[];
   /** Metadata about the generation process */
@@ -180,22 +195,37 @@ export async function generateDraft(input: DraftInput): Promise<DraftOutput> {
     throw new Error(`Failed to generate draft: ${errorMessage}`);
   }
 
-  // Step 4: Calculate confidence score
+  // Step 4: Calculate confidence score using comprehensive scoring
   console.log("[AI] Step 4: Calculating confidence score...");
-  const confidenceScore = calculateDraftConfidence(context);
-  console.log(`[AI] Confidence score: ${confidenceScore.toFixed(2)}`);
-
-  // Step 5: Build output
-  const endTime = Date.now();
-  const generationTimeMs = endTime - startTime;
 
   // Count sources by type
   const kbSources = context.sources.filter((s) => s.type === "kb");
   const ticketSources = context.sources.filter((s) => s.type === "ticket");
 
+  // Calculate confidence with all factors
+  const confidenceResult = calculateConfidenceScore({
+    sources: context.sources.map((s) => ({ similarity: s.similarity })),
+    queryLength: customerMessage.length,
+    kbMatchCount: kbSources.length,
+    ticketMatchCount: ticketSources.length,
+  });
+
+  console.log(`[AI] Confidence: ${confidenceResult.score.toFixed(2)} (${confidenceResult.level})`);
+  console.log(`[AI] Factors: relevance=${confidenceResult.factors.sourceRelevance.toFixed(2)}, coverage=${confidenceResult.factors.sourceCoverage.toFixed(2)}, clarity=${confidenceResult.factors.queryClarity.toFixed(2)}, match=${confidenceResult.factors.contextMatch.toFixed(2)}`);
+
+  // Step 5: Build output
+  const endTime = Date.now();
+  const generationTimeMs = endTime - startTime;
+
+  // Determine if review is needed
+  const needsReview = shouldFlagForReview(confidenceResult) || completionResult.content.length < 50;
+
   const output: DraftOutput = {
     content: completionResult.content,
-    confidenceScore,
+    confidenceScore: confidenceResult.score,
+    confidenceLevel: confidenceResult.level,
+    confidenceExplanation: confidenceResult.explanation,
+    needsReview,
     sources: context.sources.map((s) => ({
       type: s.type,
       id: s.id,
@@ -212,52 +242,15 @@ export async function generateDraft(input: DraftInput): Promise<DraftOutput> {
         completion: completionResult.completionTokens,
         total: completionResult.totalTokens,
       },
+      confidenceFactors: confidenceResult.factors,
     },
   };
 
   console.log(`[AI] Draft generation complete in ${generationTimeMs}ms`);
   console.log(`[AI] Sources: ${kbSources.length} KB articles, ${ticketSources.length} tickets`);
+  console.log(`[AI] Needs review: ${needsReview}`);
 
   return output;
-}
-
-// ===========================================
-// Confidence Calculation
-// ===========================================
-
-/**
- * Calculate confidence score for a draft based on retrieved context
- *
- * Scoring factors:
- * - Base: Uses calculateConfidence from RAG module
- * - No sources: Returns 0.3 (low confidence)
- * - With sources: Weighted average of similarity scores
- *
- * This is a placeholder for more sophisticated scoring in Task 2.11.
- *
- * @param context - The assembled RAG context
- * @returns Confidence score between 0 and 1
- */
-function calculateDraftConfidence(context: AssembledContext): number {
-  // Use the RAG module's confidence calculation as base
-  const baseConfidence = calculateConfidence(context);
-
-  // If no sources, return low confidence
-  if (!context.hasContext || context.sources.length === 0) {
-    return 0.3;
-  }
-
-  // Calculate average similarity of top sources
-  const topSources = context.sources.slice(0, 3);
-  const avgSimilarity =
-    topSources.reduce((sum, source) => sum + source.similarity, 0) / topSources.length;
-
-  // Blend base confidence with similarity score
-  // This can be expanded in Task 2.11 with more factors
-  const blendedScore = baseConfidence * 0.5 + avgSimilarity * 0.5;
-
-  // Clamp between 0 and 1
-  return Math.max(0, Math.min(1, blendedScore));
 }
 
 // ===========================================
@@ -267,21 +260,19 @@ function calculateDraftConfidence(context: AssembledContext): number {
 /**
  * Check if a draft should be flagged for human review
  *
+ * Uses the draft's needsReview property which is calculated during generation,
+ * but also checks for additional conditions.
+ *
  * @param draft - The generated draft output
  * @returns True if draft needs review
  */
 export function needsHumanReview(draft: DraftOutput): boolean {
-  // Low confidence threshold
-  if (draft.confidenceScore < 0.5) {
+  // Use pre-calculated needsReview flag
+  if (draft.needsReview) {
     return true;
   }
 
-  // No sources found
-  if (draft.sources.length === 0) {
-    return true;
-  }
-
-  // Very short response might indicate an issue
+  // Additional check: very short response might indicate an issue
   if (draft.content.length < 50) {
     return true;
   }
@@ -289,20 +280,5 @@ export function needsHumanReview(draft: DraftOutput): boolean {
   return false;
 }
 
-/**
- * Get a human-readable confidence level
- *
- * @param score - Confidence score (0-1)
- * @returns Human-readable confidence level
- */
-export function getConfidenceLevel(
-  score: number
-): "high" | "medium" | "low" {
-  if (score >= 0.7) {
-    return "high";
-  }
-  if (score >= 0.5) {
-    return "medium";
-  }
-  return "low";
-}
+// Re-export getConfidenceLevel from confidence module for convenience
+export { getConfidenceLevel } from "./confidence";
