@@ -11,7 +11,8 @@
     "seed-kb": "npx tsx scripts/seed-kb.ts",
     "test-pipeline": "npx tsx scripts/test-pipeline.ts",
     "test-pipeline:quick": "npx tsx scripts/test-pipeline.ts --quick",
-    "test-pipeline:full": "npx tsx scripts/test-pipeline.ts --full"
+    "test-pipeline:full": "npx tsx scripts/test-pipeline.ts --full",
+    "diagnose-rag": "npx tsx scripts/diagnose-rag.ts"
   },
   "dependencies": {
     "@supabase/ssr": "^0.8.0",
