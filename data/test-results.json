@@ -1,0 +1,458 @@
+{
+  "timestamp": "2026-01-15T07:42:13.945Z",
+  "organizationId": "0a2cf873-9887-4a5c-9544-29b036e8fac5",
+  "sampleSize": 5,
+  "metrics": {
+    "totalTests": 5,
+    "passedTests": 5,
+    "failedTests": 0,
+    "blockedInputs": 0,
+    "fallbackCount": 4,
+    "fallbackRate": 80,
+    "averageConfidence": 0.23108383890500378,
+    "averageGenerationTime": 2118,
+    "moderationFlags": 0,
+    "confidenceDistribution": {
+      "high": 0,
+      "medium": 1,
+      "low": 4
+    }
+  },
+  "results": [
+    {
+      "input": "help to change an article of purchase {{Order Number}}",
+      "sanitizedInput": "help to change an article of purchase {{Order Number}}",
+      "piiRedactedInput": "help to change an article of purchase {{Order Number}}",
+      "safetyResult": {
+        "sanitized": "help to change an article of purchase {{Order Number}}",
+        "piiRedacted": "help to change an article of purchase {{Order Number}}",
+        "hasPII": false,
+        "piiTypes": [],
+        "riskLevel": "none",
+        "flags": [],
+        "wasModified": false,
+        "shouldBlock": false
+      },
+      "draft": {
+        "content": "Thank you for reaching out. I want to make sure I give you accurate information. Let me look into this further and get back to you shortly, or I'll connect you with a team member who can help with your specific question.",
+        "confidenceScore": 0.13599999999999998,
+        "confidenceLevel": "low",
+        "confidenceExplanation": "Low confidence: No highly relevant sources found. Response based on general knowledge only. Context may not fully address the query. Manual review recommended.",
+        "needsReview": true,
+        "sources": [],
+        "metadata": {
+          "model": "fallback",
+          "retrievedKbCount": 0,
+          "retrievedTicketCount": 0,
+          "generationTimeMs": 1268,
+          "confidenceFactors": {
+            "sourceRelevance": 0,
+            "sourceCoverage": 0,
+            "queryClarity": 0.9066666666666666,
+            "contextMatch": 0
+          }
+        },
+        "isFallback": true,
+        "fallbackReason": "no_sources",
+        "suggestedActions": [
+          "Escalate to senior agent",
+          "Search for more context",
+          "Request clarification from customer"
+        ]
+      },
+      "moderationResult": {
+        "flagged": false,
+        "categories": {
+          "harassment": false,
+          "harassment/threatening": false,
+          "sexual": false,
+          "hate": false,
+          "hate/threatening": false,
+          "illicit": false,
+          "illicit/violent": false,
+          "self-harm/intent": false,
+          "self-harm/instructions": false,
+          "self-harm": false,
+          "sexual/minors": false,
+          "violence": false,
+          "violence/graphic": false
+        },
+        "categoryScores": {
+          "harassment": 0.0000041335397768930325,
+          "harassment/threatening": 0.0000013007128466476034,
+          "sexual": 0.000006014151777699533,
+          "hate": 5.255395707074638e-7,
+          "hate/threatening": 7.338209805254082e-8,
+          "illicit": 0.000002212566909570261,
+          "illicit/violent": 0.0000010953122821495382,
+          "self-harm/intent": 9.368717268777097e-7,
+          "self-harm/instructions": 4.222833444659923e-7,
+          "self-harm": 0.0000014064044342149064,
+          "sexual/minors": 0.0000012606946239951315,
+          "violence": 0.000005829126566113866,
+          "violence/graphic": 5.955139348629957e-7
+        },
+        "flaggedCategories": [],
+        "maxScore": 0.000006014151777699533,
+        "maxScoreCategory": "sexual"
+      },
+      "passed": true,
+      "timings": {
+        "sanitization": 2,
+        "generation": 1269,
+        "moderation": 462,
+        "total": 1733
+      }
+    },
+    {
+      "input": "I don't know what to do to cancel purchase {{Order Number}}",
+      "sanitizedInput": "I don't know what to do to cancel purchase {{Order Number}}",
+      "piiRedactedInput": "I don't know what to do to cancel purchase {{Order Number}}",
+      "safetyResult": {
+        "sanitized": "I don't know what to do to cancel purchase {{Order Number}}",
+        "piiRedacted": "I don't know what to do to cancel purchase {{Order Number}}",
+        "hasPII": false,
+        "piiTypes": [],
+        "riskLevel": "none",
+        "flags": [],
+        "wasModified": false,
+        "shouldBlock": false
+      },
+      "draft": {
+        "content": "Hello!\n\nThank you for reaching out regarding your desire to cancel purchase {{Order Number}}. I completely understand that sometimes plans change, and I'm here to help you through this process.\n\nTo assist you further, could you please provide any specific details or questions you have about the cancellation? This will help me guide you more effectively.\n\nLooking forward to your response, and I'm here to help with anything else you might need! \n\nBest regards,  \n[Your Name]",
+        "confidenceScore": 0.618419194525019,
+        "confidenceLevel": "medium",
+        "confidenceExplanation": "Medium confidence: Partial matches found in sources. Few sources available.",
+        "needsReview": false,
+        "sources": [
+          {
+            "type": "kb",
+            "id": "e411df73-0757-437d-9c46-58ee7cc206dc",
+            "title": "How to Cancel Order",
+            "similarity": 0.718615324208365
+          }
+        ],
+        "metadata": {
+          "model": "gpt-4o-mini-2024-07-18",
+          "retrievedKbCount": 1,
+          "retrievedTicketCount": 0,
+          "generationTimeMs": 5425,
+          "tokenUsage": {
+            "prompt": 418,
+            "completion": 92,
+            "total": 510
+          },
+          "confidenceFactors": {
+            "sourceRelevance": 0.718615324208365,
+            "sourceCoverage": 0.2,
+            "queryClarity": 0.915,
+            "contextMatch": 0.718615324208365
+          }
+        },
+        "isFallback": false
+      },
+      "moderationResult": {
+        "flagged": false,
+        "categories": {
+          "harassment": false,
+          "harassment/threatening": false,
+          "sexual": false,
+          "hate": false,
+          "hate/threatening": false,
+          "illicit": false,
+          "illicit/violent": false,
+          "self-harm/intent": false,
+          "self-harm/instructions": false,
+          "self-harm": false,
+          "sexual/minors": false,
+          "violence": false,
+          "violence/graphic": false
+        },
+        "categoryScores": {
+          "harassment": 0.000006205049602300744,
+          "harassment/threatening": 0.0000013846004563753396,
+          "sexual": 0.0000024300240743279605,
+          "hate": 3.1875652166284776e-7,
+          "hate/threatening": 4.450850519411503e-8,
+          "illicit": 0.000005307507822667365,
+          "illicit/violent": 8.013499398837462e-7,
+          "self-harm/intent": 9.368717268777097e-7,
+          "self-harm/instructions": 3.84493505874534e-7,
+          "self-harm": 0.0000021112482331487175,
+          "sexual/minors": 7.646537350121258e-7,
+          "violence": 0.000004469407144215697,
+          "violence/graphic": 6.144174602214718e-7
+        },
+        "flaggedCategories": [],
+        "maxScore": 0.000006205049602300744,
+        "maxScoreCategory": "harassment"
+      },
+      "passed": true,
+      "timings": {
+        "sanitization": 1,
+        "generation": 5425,
+        "moderation": 333,
+        "total": 5759
+      }
+    },
+    {
+      "input": "how to modify order {{Order Number}}?",
+      "sanitizedInput": "how to modify order {{Order Number}}?",
+      "piiRedactedInput": "how to modify order {{Order Number}}?",
+      "safetyResult": {
+        "sanitized": "how to modify order {{Order Number}}?",
+        "piiRedacted": "how to modify order {{Order Number}}?",
+        "hasPII": false,
+        "piiTypes": [],
+        "riskLevel": "none",
+        "flags": [],
+        "wasModified": false,
+        "shouldBlock": false
+      },
+      "draft": {
+        "content": "Thank you for reaching out. I want to make sure I give you accurate information. Let me look into this further and get back to you shortly, or I'll connect you with a team member who can help with your specific question.",
+        "confidenceScore": 0.13174999999999998,
+        "confidenceLevel": "low",
+        "confidenceExplanation": "Low confidence: No highly relevant sources found. Response based on general knowledge only. Context may not fully address the query. Manual review recommended.",
+        "needsReview": true,
+        "sources": [],
+        "metadata": {
+          "model": "fallback",
+          "retrievedKbCount": 0,
+          "retrievedTicketCount": 0,
+          "generationTimeMs": 1651,
+          "confidenceFactors": {
+            "sourceRelevance": 0,
+            "sourceCoverage": 0,
+            "queryClarity": 0.8783333333333333,
+            "contextMatch": 0
+          }
+        },
+        "isFallback": true,
+        "fallbackReason": "no_sources",
+        "suggestedActions": [
+          "Escalate to senior agent",
+          "Search for more context",
+          "Request clarification from customer"
+        ]
+      },
+      "moderationResult": {
+        "flagged": false,
+        "categories": {
+          "harassment": false,
+          "harassment/threatening": false,
+          "sexual": false,
+          "hate": false,
+          "hate/threatening": false,
+          "illicit": false,
+          "illicit/violent": false,
+          "self-harm/intent": false,
+          "self-harm/instructions": false,
+          "self-harm": false,
+          "sexual/minors": false,
+          "violence": false,
+          "violence/graphic": false
+        },
+        "categoryScores": {
+          "harassment": 0.0000041335397768930325,
+          "harassment/threatening": 0.0000013007128466476034,
+          "sexual": 0.000006014151777699533,
+          "hate": 5.255395707074638e-7,
+          "hate/threatening": 7.338209805254082e-8,
+          "illicit": 0.000002212566909570261,
+          "illicit/violent": 0.0000010953122821495382,
+          "self-harm/intent": 9.368717268777097e-7,
+          "self-harm/instructions": 4.222833444659923e-7,
+          "self-harm": 0.0000014064044342149064,
+          "sexual/minors": 0.0000012219076020491008,
+          "violence": 0.000005829126566113866,
+          "violence/graphic": 5.955139348629957e-7
+        },
+        "flaggedCategories": [],
+        "maxScore": 0.000006014151777699533,
+        "maxScoreCategory": "sexual"
+      },
+      "passed": true,
+      "timings": {
+        "sanitization": 1,
+        "generation": 1651,
+        "moderation": 482,
+        "total": 2134
+      }
+    },
+    {
+      "input": "I need help to cancel purchase370795561790",
+      "sanitizedInput": "I need help to cancel purchase370795561790",
+      "piiRedactedInput": "I need help to cancel purchase37[PHONE]",
+      "safetyResult": {
+        "sanitized": "I need help to cancel purchase370795561790",
+        "piiRedacted": "I need help to cancel purchase37[PHONE]",
+        "hasPII": true,
+        "piiTypes": [
+          "phone"
+        ],
+        "riskLevel": "none",
+        "flags": [
+          "pii_phone"
+        ],
+        "wasModified": false,
+        "shouldBlock": false
+      },
+      "draft": {
+        "content": "Thank you for reaching out. I want to make sure I give you accurate information. Let me look into this further and get back to you shortly, or I'll connect you with a team member who can help with your specific question.",
+        "confidenceScore": 0.13299999999999998,
+        "confidenceLevel": "low",
+        "confidenceExplanation": "Low confidence: No highly relevant sources found. Response based on general knowledge only. Context may not fully address the query. Manual review recommended.",
+        "needsReview": true,
+        "sources": [],
+        "metadata": {
+          "model": "fallback",
+          "retrievedKbCount": 0,
+          "retrievedTicketCount": 0,
+          "generationTimeMs": 1183,
+          "confidenceFactors": {
+            "sourceRelevance": 0,
+            "sourceCoverage": 0,
+            "queryClarity": 0.8866666666666666,
+            "contextMatch": 0
+          }
+        },
+        "isFallback": true,
+        "fallbackReason": "no_sources",
+        "suggestedActions": [
+          "Escalate to senior agent",
+          "Search for more context",
+          "Request clarification from customer"
+        ]
+      },
+      "moderationResult": {
+        "flagged": false,
+        "categories": {
+          "harassment": false,
+          "harassment/threatening": false,
+          "sexual": false,
+          "hate": false,
+          "hate/threatening": false,
+          "illicit": false,
+          "illicit/violent": false,
+          "self-harm/intent": false,
+          "self-harm/instructions": false,
+          "self-harm": false,
+          "sexual/minors": false,
+          "violence": false,
+          "violence/graphic": false
+        },
+        "categoryScores": {
+          "harassment": 0.0000041335397768930325,
+          "harassment/threatening": 0.0000013007128466476034,
+          "sexual": 0.000006014151777699533,
+          "hate": 5.255395707074638e-7,
+          "hate/threatening": 7.338209805254082e-8,
+          "illicit": 0.000002212566909570261,
+          "illicit/violent": 0.0000010953122821495382,
+          "self-harm/intent": 9.368717268777097e-7,
+          "self-harm/instructions": 4.222833444659923e-7,
+          "self-harm": 0.0000014064044342149064,
+          "sexual/minors": 0.0000012219076020491008,
+          "violence": 0.000005829126566113866,
+          "violence/graphic": 5.955139348629957e-7
+        },
+        "flaggedCategories": [],
+        "maxScore": 0.000006014151777699533,
+        "maxScoreCategory": "sexual"
+      },
+      "passed": true,
+      "timings": {
+        "sanitization": 0,
+        "generation": 1183,
+        "moderation": 1287,
+        "total": 2470
+      }
+    },
+    {
+      "input": "i made an mistake could i modify order {{Order Number}}",
+      "sanitizedInput": "i made an mistake could i modify order {{Order Number}}",
+      "piiRedactedInput": "i made an mistake could i modify order {{Order Number}}",
+      "safetyResult": {
+        "sanitized": "i made an mistake could i modify order {{Order Number}}",
+        "piiRedacted": "i made an mistake could i modify order {{Order Number}}",
+        "hasPII": false,
+        "piiTypes": [],
+        "riskLevel": "none",
+        "flags": [],
+        "wasModified": false,
+        "shouldBlock": false
+      },
+      "draft": {
+        "content": "Thank you for reaching out. I want to make sure I give you accurate information. Let me look into this further and get back to you shortly, or I'll connect you with a team member who can help with your specific question.",
+        "confidenceScore": 0.13624999999999998,
+        "confidenceLevel": "low",
+        "confidenceExplanation": "Low confidence: No highly relevant sources found. Response based on general knowledge only. Context may not fully address the query. Manual review recommended.",
+        "needsReview": true,
+        "sources": [],
+        "metadata": {
+          "model": "fallback",
+          "retrievedKbCount": 0,
+          "retrievedTicketCount": 0,
+          "generationTimeMs": 1062,
+          "confidenceFactors": {
+            "sourceRelevance": 0,
+            "sourceCoverage": 0,
+            "queryClarity": 0.9083333333333333,
+            "contextMatch": 0
+          }
+        },
+        "isFallback": true,
+        "fallbackReason": "no_sources",
+        "suggestedActions": [
+          "Escalate to senior agent",
+          "Search for more context",
+          "Request clarification from customer"
+        ]
+      },
+      "moderationResult": {
+        "flagged": false,
+        "categories": {
+          "harassment": false,
+          "harassment/threatening": false,
+          "sexual": false,
+          "hate": false,
+          "hate/threatening": false,
+          "illicit": false,
+          "illicit/violent": false,
+          "self-harm/intent": false,
+          "self-harm/instructions": false,
+          "self-harm": false,
+          "sexual/minors": false,
+          "violence": false,
+          "violence/graphic": false
+        },
+        "categoryScores": {
+          "harassment": 0.0000041335397768930325,
+          "harassment/threatening": 0.0000013007128466476034,
+          "sexual": 0.000006014151777699533,
+          "hate": 5.255395707074638e-7,
+          "hate/threatening": 7.338209805254082e-8,
+          "illicit": 0.000002212566909570261,
+          "illicit/violent": 0.0000010953122821495382,
+          "self-harm/intent": 9.368717268777097e-7,
+          "self-harm/instructions": 4.222833444659923e-7,
+          "self-harm": 0.0000014064044342149064,
+          "sexual/minors": 0.0000012219076020491008,
+          "violence": 0.000005829126566113866,
+          "violence/graphic": 5.955139348629957e-7
+        },
+        "flaggedCategories": [],
+        "maxScore": 0.000006014151777699533,
+        "maxScoreCategory": "sexual"
+      },
+      "passed": true,
+      "timings": {
+        "sanitization": 0,
+        "generation": 1062,
+        "moderation": 519,
+        "total": 1581
+      }
+    }
+  ]
+}

@@ -16,15 +16,33 @@
 import * as dotenv from "dotenv";
 import * as fs from "fs";
 import * as path from "path";
+import { randomUUID } from "crypto";
 
 // Load environment variables
 dotenv.config({ path: ".env.local" });
 dotenv.config({ path: ".env" });
 
-// Import from source files using relative paths
-import { processUserInput, type ProcessedInput } from "../src/lib/safety";
-import { generateDraft, type DraftOutput } from "../src/lib/ai";
-import { checkModeration, type ExtendedModerationResult } from "../src/lib/openai/moderation";
+/**
+ * IMPORTANT:
+ * This script must load dotenv BEFORE importing any app modules.
+ * Some modules (e.g. OpenAI client) read env vars at import time.
+ * Static ESM imports run before the module body, so we use dynamic imports below.
+ */
+type ProcessedInput = import("../src/lib/safety").ProcessedInput;
+type DraftOutput = import("../src/lib/ai").DraftOutput;
+type ExtendedModerationResult = import("../src/lib/openai/moderation").ExtendedModerationResult;
+
+async function loadPipelineModules() {
+  const safety = await import("../src/lib/safety");
+  const ai = await import("../src/lib/ai");
+  const moderation = await import("../src/lib/openai/moderation");
+
+  return {
+    processUserInput: safety.processUserInput,
+    generateDraft: ai.generateDraft,
+    checkModeration: moderation.checkModeration,
+  };
+}
 
 // ===========================================
 // Types
@@ -138,6 +156,7 @@ async function testSingleQuery(
   organizationId: string,
   userId: string = DEFAULT_USER_ID
 ): Promise<TestResult> {
+  const { processUserInput, generateDraft, checkModeration } = await loadPipelineModules();
   const startTime = Date.now();
   let sanitizationTime = 0;
   let generationTime = 0;
@@ -173,7 +192,8 @@ async function testSingleQuery(
   try {
     const generationStart = Date.now();
     draft = await generateDraft({
-      ticketId: `test-ticket-${Date.now()}`,
+      // Must be a UUID because RAG similar-tickets search expects a uuid ticket_id
+      ticketId: randomUUID(),
       customerMessage: safetyResult.sanitized,
       organizationId,
       userId,
