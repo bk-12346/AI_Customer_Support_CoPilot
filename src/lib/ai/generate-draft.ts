@@ -34,6 +34,13 @@ import {
   type ConfidenceResult,
   type ConfidenceFactors,
 } from "./confidence";
+import {
+  shouldUseFallback,
+  getFallbackReason,
+  generateFallbackResponse,
+  generateErrorFallback,
+  type FallbackReason,
+} from "./fallback";
 
 // ===========================================
 // Types
@@ -111,6 +118,12 @@ export interface DraftOutput {
   sources: DraftSource[];
   /** Metadata about the generation process */
   metadata: DraftMetadata;
+  /** Whether this is a fallback response (not AI-generated) */
+  isFallback?: boolean;
+  /** Reason for fallback (if isFallback is true) */
+  fallbackReason?: FallbackReason;
+  /** Suggested actions for the agent (especially for fallback responses) */
+  suggestedActions?: string[];
 }
 
 // ===========================================
@@ -177,30 +190,13 @@ export async function generateDraft(input: DraftInput): Promise<DraftOutput> {
     throw new Error(`Failed to retrieve context: ${errorMessage}`);
   }
 
-  // Step 2: Build messages for LLM
-  console.log("[AI] Step 2: Building prompt messages...");
-  const messages = buildMessages(customerMessage, context, promptOptions);
-  console.log(`[AI] Built ${messages.length} messages for completion`);
-
-  // Step 3: Generate completion
-  console.log("[AI] Step 3: Generating completion...");
-  let completionResult;
-
-  try {
-    completionResult = await generateCompletion(messages, completionOptions);
-    console.log(`[AI] Completion generated: ${completionResult.content.length} chars, model: ${completionResult.model}`);
-  } catch (error) {
-    const errorMessage = error instanceof Error ? error.message : "Unknown error";
-    console.error("[AI] Generation failed:", errorMessage);
-    throw new Error(`Failed to generate draft: ${errorMessage}`);
-  }
-
-  // Step 4: Calculate confidence score using comprehensive scoring
-  console.log("[AI] Step 4: Calculating confidence score...");
+  // Step 2: Calculate preliminary confidence to check for fallback
+  console.log("[AI] Step 2: Calculating preliminary confidence...");
 
   // Count sources by type
   const kbSources = context.sources.filter((s) => s.type === "kb");
   const ticketSources = context.sources.filter((s) => s.type === "ticket");
+  const totalSources = kbSources.length + ticketSources.length;
 
   // Calculate confidence with all factors
   const confidenceResult = calculateConfidenceScore({
@@ -213,7 +209,100 @@ export async function generateDraft(input: DraftInput): Promise<DraftOutput> {
   console.log(`[AI] Confidence: ${confidenceResult.score.toFixed(2)} (${confidenceResult.level})`);
   console.log(`[AI] Factors: relevance=${confidenceResult.factors.sourceRelevance.toFixed(2)}, coverage=${confidenceResult.factors.sourceCoverage.toFixed(2)}, clarity=${confidenceResult.factors.queryClarity.toFixed(2)}, match=${confidenceResult.factors.contextMatch.toFixed(2)}`);
 
-  // Step 5: Build output
+  // Step 3: Check if fallback is needed
+  if (shouldUseFallback(confidenceResult.score, totalSources)) {
+    console.log("[AI] Step 3: Fallback triggered - skipping LLM generation");
+
+    const fallbackReason = getFallbackReason(
+      confidenceResult.score,
+      totalSources,
+      customerMessage.length
+    );
+    const fallbackResponse = generateFallbackResponse(fallbackReason, customerMessage);
+
+    const endTime = Date.now();
+    const generationTimeMs = endTime - startTime;
+
+    const fallbackOutput: DraftOutput = {
+      content: fallbackResponse.content,
+      confidenceScore: confidenceResult.score,
+      confidenceLevel: confidenceResult.level,
+      confidenceExplanation: confidenceResult.explanation,
+      needsReview: true, // Fallbacks always need review
+      sources: context.sources.map((s) => ({
+        type: s.type,
+        id: s.id,
+        title: s.title,
+        similarity: s.similarity,
+      })),
+      metadata: {
+        model: "fallback",
+        retrievedKbCount: kbSources.length,
+        retrievedTicketCount: ticketSources.length,
+        generationTimeMs,
+        confidenceFactors: confidenceResult.factors,
+      },
+      isFallback: true,
+      fallbackReason,
+      suggestedActions: fallbackResponse.suggestedActions,
+    };
+
+    console.log(`[AI] Fallback response generated in ${generationTimeMs}ms`);
+    console.log(`[AI] Fallback reason: ${fallbackReason}`);
+    console.log(`[AI] Suggested actions: ${fallbackResponse.suggestedActions.join(", ")}`);
+
+    return fallbackOutput;
+  }
+
+  // Step 4: Build messages for LLM
+  console.log("[AI] Step 4: Building prompt messages...");
+  const messages = buildMessages(customerMessage, context, promptOptions);
+  console.log(`[AI] Built ${messages.length} messages for completion`);
+
+  // Step 5: Generate completion
+  console.log("[AI] Step 5: Generating completion...");
+  let completionResult;
+
+  try {
+    completionResult = await generateCompletion(messages, completionOptions);
+    console.log(`[AI] Completion generated: ${completionResult.content.length} chars, model: ${completionResult.model}`);
+  } catch (error) {
+    // On generation error, return a fallback response
+    console.error("[AI] Generation failed, returning fallback response");
+    const fallbackResponse = generateErrorFallback(
+      error instanceof Error ? error : new Error("Unknown error"),
+      customerMessage
+    );
+
+    const endTime = Date.now();
+    const generationTimeMs = endTime - startTime;
+
+    return {
+      content: fallbackResponse.content,
+      confidenceScore: confidenceResult.score,
+      confidenceLevel: confidenceResult.level,
+      confidenceExplanation: "Generation failed - using fallback response",
+      needsReview: true,
+      sources: context.sources.map((s) => ({
+        type: s.type,
+        id: s.id,
+        title: s.title,
+        similarity: s.similarity,
+      })),
+      metadata: {
+        model: "fallback",
+        retrievedKbCount: kbSources.length,
+        retrievedTicketCount: ticketSources.length,
+        generationTimeMs,
+        confidenceFactors: confidenceResult.factors,
+      },
+      isFallback: true,
+      fallbackReason: "generation_error",
+      suggestedActions: fallbackResponse.suggestedActions,
+    };
+  }
+
+  // Step 6: Build output
   const endTime = Date.now();
   const generationTimeMs = endTime - startTime;
 
@@ -244,6 +333,7 @@ export async function generateDraft(input: DraftInput): Promise<DraftOutput> {
       },
       confidenceFactors: confidenceResult.factors,
     },
+    isFallback: false, // Explicitly mark as not a fallback
   };
 
   console.log(`[AI] Draft generation complete in ${generationTimeMs}ms`);
