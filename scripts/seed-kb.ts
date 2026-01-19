@@ -256,8 +256,8 @@ async function seedArticles(
           continue;
         }
 
-        // Generate embedding
-        const textForEmbedding = `${article.title}\n\n${article.content}`;
+        // Generate embedding - repeat title to boost its weight against content dilution
+        const textForEmbedding = `${article.title}\n\n${article.title}\n\n${article.content}`;
         const embedding = await generateEmbedding(openai, textForEmbedding);
 
         // Insert article
