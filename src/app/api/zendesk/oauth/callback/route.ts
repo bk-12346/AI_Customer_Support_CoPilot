@@ -153,8 +153,9 @@ export async function GET(request: NextRequest) {
       redirectUri
     );
 
-    // Calculate token expiration
-    const expiresAt = new Date(Date.now() + tokenResponse.expires_in * 1000);
+    // Calculate token expiration (default to 2 hours if not provided)
+    const expiresInSeconds = tokenResponse.expires_in || 7200;
+    const expiresAt = new Date(Date.now() + expiresInSeconds * 1000);
 
     // Encrypt tokens for storage
     const { accessTokenEncrypted, refreshTokenEncrypted } = encryptCredentials(
