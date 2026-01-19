@@ -1,3 +1,9 @@
+import ZendeskIntegration from "@/components/settings/ZendeskIntegration";
+
+// For now, use the test organization ID
+// In production, this would come from the authenticated user's session
+const TEST_ORG_ID = "0a2cf873-9887-4a5c-9544-29b036e8fac5";
+
 export default function SettingsPage() {
   return (
     <div className="p-8">
@@ -5,15 +11,7 @@ export default function SettingsPage() {
 
       <div className="space-y-6 max-w-2xl">
         {/* Zendesk Integration */}
-        <div className="bg-white rounded-lg border p-6">
-          <h2 className="font-semibold mb-4">Zendesk Integration</h2>
-          <p className="text-gray-500 text-sm mb-4">
-            Connect your Zendesk account to sync tickets and help center articles
-          </p>
-          <button className="px-4 py-2 bg-black text-white rounded-lg hover:bg-gray-800 transition">
-            Connect Zendesk
-          </button>
-        </div>
+        <ZendeskIntegration organizationId={TEST_ORG_ID} />
 
         {/* Profile Settings */}
         <div className="bg-white rounded-lg border p-6">
