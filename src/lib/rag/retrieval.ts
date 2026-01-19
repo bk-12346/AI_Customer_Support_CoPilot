@@ -78,7 +78,7 @@ export interface TicketMessage {
 
 const DEFAULT_MATCH_COUNT_KB = 5;
 const DEFAULT_MATCH_COUNT_TICKETS = 3;
-const DEFAULT_MATCH_THRESHOLD = 0.7;
+const DEFAULT_MATCH_THRESHOLD = 0.4;
 
 // ===========================================
 // Supabase Client
