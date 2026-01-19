@@ -376,6 +376,48 @@ function saveJSON(data: unknown, filename: string): void {
 }
 
 /**
+ * Load existing KB articles from file (if exists)
+ */
+function loadExistingArticles(filename: string): KBArticle[] {
+  const filepath = path.join(DATA_DIR, filename);
+  if (fs.existsSync(filepath)) {
+    try {
+      const content = fs.readFileSync(filepath, 'utf-8');
+      const articles = JSON.parse(content) as KBArticle[];
+      console.log(`  Found ${articles.length} existing articles in ${filename}`);
+      return articles;
+    } catch (error) {
+      console.warn(`  Warning: Could not parse existing ${filename}, starting fresh`);
+      return [];
+    }
+  }
+  return [];
+}
+
+/**
+ * Merge new articles with existing ones, preserving custom articles
+ * Custom articles are identified by source !== 'generated' OR titles not in new articles
+ */
+function mergeArticles(existingArticles: KBArticle[], newArticles: KBArticle[]): KBArticle[] {
+  const newTitles = new Set(newArticles.map(a => a.title.toLowerCase()));
+
+  // Keep existing articles that are NOT in the new dataset (custom articles)
+  const customArticles = existingArticles.filter(article => {
+    const isInNewDataset = newTitles.has(article.title.toLowerCase());
+    if (!isInNewDataset) {
+      console.log(`  Preserving custom article: "${article.title}"`);
+    }
+    return !isInNewDataset;
+  });
+
+  // Combine: new articles first, then custom articles
+  const merged = [...newArticles, ...customArticles];
+
+  console.log(`  Merged: ${newArticles.length} from dataset + ${customArticles.length} custom = ${merged.length} total`);
+  return merged;
+}
+
+/**
  * Main processing pipeline
  */
 async function main() {
@@ -407,9 +449,16 @@ async function main() {
     // Save raw data
     saveJSON(maktekRecords, 'raw/maktek-raw.json');
 
-    // 3. Process Bitext -> KB Articles
+    // 3. Process Bitext -> KB Articles (preserving custom articles)
     console.log('\n[3/5] Processing Bitext into KB articles...');
-    const kbArticles = processBitextToKB(bitextRecords);
+    const newKbArticles = processBitextToKB(bitextRecords);
+
+    // Load existing articles and merge (preserves custom articles)
+    const existingKbArticles = loadExistingArticles('kb-articles.json');
+    const kbArticles = existingKbArticles.length > 0
+      ? mergeArticles(existingKbArticles, newKbArticles)
+      : newKbArticles;
+
     saveJSON(kbArticles, 'kb-articles.json');
 
     // 4. Process MakTek -> FAQ Articles
