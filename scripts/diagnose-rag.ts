@@ -238,7 +238,7 @@ async function testThresholds(
 async function testQueryCoverage(
   queries: string[],
   organizationId: string,
-  threshold: number = 0.5
+  threshold: number = 0.4
 ): Promise<QueryCoverageResult[]> {
   const { generateEmbedding } = await loadEmbeddingModule();
   const results: QueryCoverageResult[] = [];
@@ -248,6 +248,8 @@ async function testQueryCoverage(
 
     try {
       const { embedding } = await generateEmbedding(query);
+
+      // First try at the given threshold
       const matches = await searchWithThreshold(
         embedding,
         organizationId,
@@ -255,18 +257,37 @@ async function testQueryCoverage(
         1
       );
 
-      const bestMatch = matches.length > 0 ? matches[0] : null;
+      let bestMatch = matches.length > 0 ? matches[0] : null;
+      let belowThreshold = false;
+
+      // If no match at threshold, try at 0.1 to see actual best score
+      if (!bestMatch) {
+        const lowThresholdMatches = await searchWithThreshold(
+          embedding,
+          organizationId,
+          0.1,
+          1
+        );
+        if (lowThresholdMatches.length > 0) {
+          bestMatch = lowThresholdMatches[0];
+          belowThreshold = true;
+        }
+      }
 
       results.push({
         query,
-        bestMatch,
+        bestMatch: belowThreshold ? null : bestMatch, // Only count as match if above threshold
         matchCount: matches.length,
       });
 
       if (bestMatch) {
-        console.log(`→ "${truncate(bestMatch.title, 40)}" (${bestMatch.similarity.toFixed(3)})`);
+        if (belowThreshold) {
+          console.log(`→ BELOW THRESHOLD: "${truncate(bestMatch.title, 30)}" (${bestMatch.similarity.toFixed(3)})`);
+        } else {
+          console.log(`→ "${truncate(bestMatch.title, 40)}" (${bestMatch.similarity.toFixed(3)})`);
+        }
       } else {
-        console.log("→ No match");
+        console.log("→ No match at all");
       }
     } catch (error) {
       console.log(`→ Error: ${error}`);
@@ -438,13 +459,13 @@ async function main(): Promise<void> {
     console.log("Step 3: Query Coverage Test");
     console.log("-".repeat(60));
 
-    console.log("\nTesting queries at threshold 0.5:");
+    console.log("\nTesting queries at threshold 0.4:");
     const coverageResults = await testQueryCoverage(
       TEST_QUERIES,
       DEFAULT_ORG_ID,
-      0.5
+      0.4
     );
-    printQueryCoverage(coverageResults, 0.5);
+    printQueryCoverage(coverageResults, 0.4);
 
     // Summary and recommendations
     console.log("\n" + "=".repeat(60));
@@ -464,9 +485,9 @@ async function main(): Promise<void> {
       console.log(`\n✓ Best performing threshold: ${bestThreshold.threshold}`);
       console.log(`  Found ${bestThreshold.matchCount} matches`);
 
-      if (bestThreshold.threshold < 0.5) {
+      if (bestThreshold.threshold < 0.4) {
         console.log("\n⚠️  Consider lowering default threshold");
-        console.log("   Current default is 0.7, but best results at " +
+        console.log("   Current default is 0.4, but best results at " +
           bestThreshold.threshold);
       }
     }
