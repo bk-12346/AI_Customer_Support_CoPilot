@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
+import { useAuth } from "@/contexts/AuthContext";
 
 // ===========================================
 // Types
@@ -53,9 +54,6 @@ interface Ticket {
   drafts: Draft[];
 }
 
-// Test organization ID
-const TEST_ORG_ID = "0a2cf873-9887-4a5c-9544-29b036e8fac5";
-
 // ===========================================
 // Component
 // ===========================================
@@ -63,6 +61,7 @@ const TEST_ORG_ID = "0a2cf873-9887-4a5c-9544-29b036e8fac5";
 export default function TicketDetailPage() {
   const params = useParams();
   const ticketId = params.id as string;
+  const { profile } = useAuth();
 
   const [ticket, setTicket] = useState<Ticket | null>(null);
   const [loading, setLoading] = useState(true);
@@ -71,6 +70,9 @@ export default function TicketDetailPage() {
   const [currentDraft, setCurrentDraft] = useState<Draft | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
+
+  const organizationId = profile?.organizationId;
+  const userId = profile?.id;
 
   const fetchTicket = useCallback(async () => {
     try {
@@ -111,6 +113,8 @@ export default function TicketDetailPage() {
   }, [ticketId, fetchTicket]);
 
   const handleGenerateDraft = async () => {
+    if (!organizationId || !userId) return;
+
     setGenerating(true);
     setError(null);
 
@@ -120,8 +124,8 @@ export default function TicketDetailPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ticketId,
-          organizationId: TEST_ORG_ID,
-          userId: "test-user",
+          organizationId,
+          userId,
         }),
       });
 
@@ -140,7 +144,7 @@ export default function TicketDetailPage() {
   };
 
   const handleApproveAndSend = async () => {
-    if (!currentDraft) return;
+    if (!currentDraft || !organizationId) return;
 
     setSending(true);
     setError(null);
@@ -153,7 +157,7 @@ export default function TicketDetailPage() {
         body: JSON.stringify({
           content: currentDraft.content,
           draftId: currentDraft.id,
-          organizationId: TEST_ORG_ID,
+          organizationId,
         }),
       });
 

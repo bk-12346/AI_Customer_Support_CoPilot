@@ -1,6 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
+import { useAuth } from "@/contexts/AuthContext";
 
 const navigation = [
   { name: "Tickets", href: "/tickets", icon: "📥" },
@@ -10,16 +11,17 @@ const navigation = [
 
 export function Sidebar() {
   const pathname = usePathname();
+  const { profile, signOut, loading } = useAuth();
 
   return (
-    <div className="w-64 bg-white border-r min-h-screen p-4">
+    <div className="w-64 bg-white border-r min-h-screen p-4 flex flex-col">
       <div className="mb-8">
         <a href="/" className="text-xl font-bold">
           SupportAI
         </a>
       </div>
 
-      <nav className="space-y-1">
+      <nav className="space-y-1 flex-1">
         {navigation.map((item) => {
           const isActive = pathname.startsWith(item.href);
           return (
@@ -39,8 +41,21 @@ export function Sidebar() {
         })}
       </nav>
 
-      <div className="absolute bottom-4 left-4 right-4">
-        <button className="w-full px-3 py-2 text-left text-gray-600 hover:bg-gray-50 rounded-lg transition">
+      <div className="border-t pt-4 mt-4">
+        {!loading && profile && (
+          <div className="px-3 py-2 mb-2">
+            <p className="text-sm font-medium text-gray-900 truncate">
+              {profile.name}
+            </p>
+            <p className="text-xs text-gray-500 truncate">
+              {profile.organizationName}
+            </p>
+          </div>
+        )}
+        <button
+          onClick={signOut}
+          className="w-full px-3 py-2 text-left text-gray-600 hover:bg-gray-50 rounded-lg transition text-sm"
+        >
           Sign out
         </button>
       </div>
