@@ -56,7 +56,7 @@ export async function POST(
     }
 
     // Get Zendesk credentials
-    const credentials = await getZendeskCredentials(supabase, organizationId);
+    const credentials = await getZendeskCredentials(organizationId);
     if (!credentials) {
       return NextResponse.json(
         { error: "Zendesk not connected" },
