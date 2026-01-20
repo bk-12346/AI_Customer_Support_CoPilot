@@ -67,8 +67,10 @@ export default function TicketDetailPage() {
   const [ticket, setTicket] = useState<Ticket | null>(null);
   const [loading, setLoading] = useState(true);
   const [generating, setGenerating] = useState(false);
+  const [sending, setSending] = useState(false);
   const [currentDraft, setCurrentDraft] = useState<Draft | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
   const fetchTicket = useCallback(async () => {
     try {
@@ -134,6 +136,42 @@ export default function TicketDetailPage() {
       setError(err instanceof Error ? err.message : "Failed to generate draft");
     } finally {
       setGenerating(false);
+    }
+  };
+
+  const handleApproveAndSend = async () => {
+    if (!currentDraft) return;
+
+    setSending(true);
+    setError(null);
+    setSuccessMessage(null);
+
+    try {
+      const response = await fetch(`/api/tickets/${ticketId}/reply`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          content: currentDraft.content,
+          draftId: currentDraft.id,
+          organizationId: TEST_ORG_ID,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Failed to send reply");
+      }
+
+      setSuccessMessage("Reply sent successfully to Zendesk!");
+      setCurrentDraft(null);
+
+      // Refresh ticket to show new message
+      await fetchTicket();
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Failed to send reply");
+    } finally {
+      setSending(false);
     }
   };
 
@@ -222,6 +260,12 @@ export default function TicketDetailPage() {
       {error && (
         <div className="mb-4 p-3 bg-red-50 text-red-700 rounded-lg text-sm">
           {error}
+        </div>
+      )}
+
+      {successMessage && (
+        <div className="mb-4 p-3 bg-green-50 text-green-700 rounded-lg text-sm">
+          {successMessage}
         </div>
       )}
 
@@ -382,8 +426,12 @@ export default function TicketDetailPage() {
                 {generating ? "Generating..." : currentDraft ? "Regenerate" : "Generate Draft"}
               </button>
               {currentDraft && (
-                <button className="flex-1 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition text-sm">
-                  Approve & Send
+                <button
+                  onClick={handleApproveAndSend}
+                  disabled={sending}
+                  className="flex-1 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition text-sm disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {sending ? "Sending..." : "Approve & Send"}
                 </button>
               )}
             </div>

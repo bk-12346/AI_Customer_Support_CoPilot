@@ -234,6 +234,60 @@ export class ZendeskClient {
     return allComments;
   }
 
+  /**
+   * Add a comment to a ticket (reply to customer)
+   *
+   * @param ticketId - Zendesk ticket ID
+   * @param body - Comment text (supports HTML)
+   * @param options.public - Whether comment is visible to customer (default: true)
+   * @param options.authorId - Author user ID (optional)
+   */
+  async addTicketComment(
+    ticketId: number,
+    body: string,
+    options: { public?: boolean; authorId?: number } = {}
+  ): Promise<ZendeskTicket> {
+    const isPublic = options.public !== false; // Default to public
+
+    const payload = {
+      ticket: {
+        comment: {
+          body,
+          public: isPublic,
+          ...(options.authorId && { author_id: options.authorId }),
+        },
+      },
+    };
+
+    const response = await this.request<{ ticket: ZendeskTicket }>(
+      `${this.baseUrl}/tickets/${ticketId}.json`,
+      {
+        method: "PUT",
+        body: JSON.stringify(payload),
+      }
+    );
+
+    return response.ticket;
+  }
+
+  /**
+   * Update ticket status
+   */
+  async updateTicketStatus(
+    ticketId: number,
+    status: "open" | "pending" | "solved" | "closed"
+  ): Promise<ZendeskTicket> {
+    const response = await this.request<{ ticket: ZendeskTicket }>(
+      `${this.baseUrl}/tickets/${ticketId}.json`,
+      {
+        method: "PUT",
+        body: JSON.stringify({ ticket: { status } }),
+      }
+    );
+
+    return response.ticket;
+  }
+
   // ===========================================
   // Users
   // ===========================================
