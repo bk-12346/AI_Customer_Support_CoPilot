@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
+import { useAuth } from "@/contexts/AuthContext";
 
 interface Ticket {
   id: string;
@@ -15,20 +16,22 @@ interface Ticket {
   updated_at: string;
 }
 
-// Test organization ID - in production this comes from user session
-const TEST_ORG_ID = "0a2cf873-9887-4a5c-9544-29b036e8fac5";
-
 export default function TicketsPage() {
   const router = useRouter();
+  const { profile, loading: authLoading } = useAuth();
   const [tickets, setTickets] = useState<Ticket[]>([]);
   const [loading, setLoading] = useState(true);
   const [syncing, setSyncing] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
+  const organizationId = profile?.organizationId;
+
   const fetchTickets = useCallback(async () => {
+    if (!organizationId) return;
+
     try {
-      const response = await fetch(`/api/tickets?organizationId=${TEST_ORG_ID}`);
+      const response = await fetch(`/api/tickets?organizationId=${organizationId}`);
       if (response.ok) {
         const data = await response.json();
         setTickets(data.tickets || []);
@@ -38,13 +41,17 @@ export default function TicketsPage() {
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [organizationId]);
 
   useEffect(() => {
-    fetchTickets();
-  }, [fetchTickets]);
+    if (organizationId) {
+      fetchTickets();
+    }
+  }, [organizationId, fetchTickets]);
 
   const handleSync = async () => {
+    if (!organizationId) return;
+
     setSyncing(true);
     setError(null);
     setSuccessMessage(null);
@@ -53,7 +60,7 @@ export default function TicketsPage() {
       const response = await fetch("/api/zendesk/sync", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ organizationId: TEST_ORG_ID, type: "tickets" }),
+        body: JSON.stringify({ organizationId, type: "tickets" }),
       });
 
       const data = await response.json();
@@ -137,7 +144,7 @@ export default function TicketsPage() {
         </div>
       )}
 
-      {loading ? (
+      {authLoading || loading ? (
         <div className="bg-white rounded-lg border p-8">
           <div className="animate-pulse space-y-4">
             {[1, 2, 3].map((i) => (

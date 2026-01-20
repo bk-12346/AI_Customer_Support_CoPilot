@@ -81,9 +81,9 @@ export interface ContextAssemblyOptions {
 
 /** Options for building full context */
 export interface BuildContextOptions extends ContextAssemblyOptions {
-  /** Similarity threshold for KB search (default: 0.7) */
+  /** Similarity threshold for KB search (default: 0.4) */
   kbThreshold?: number;
-  /** Similarity threshold for ticket search (default: 0.7) */
+  /** Similarity threshold for ticket search (default: 0.4) */
   ticketThreshold?: number;
   /** Ticket ID to exclude from similar tickets search */
   excludeTicketId?: string;
@@ -96,8 +96,8 @@ export interface BuildContextOptions extends ContextAssemblyOptions {
 const DEFAULT_MAX_KB_ARTICLES = 3;
 const DEFAULT_MAX_TICKETS = 2;
 const DEFAULT_MAX_CONTEXT_LENGTH = 4000;
-const DEFAULT_KB_THRESHOLD = 0.7;
-const DEFAULT_TICKET_THRESHOLD = 0.7;
+const DEFAULT_KB_THRESHOLD = 0.4;
+const DEFAULT_TICKET_THRESHOLD = 0.4;
 
 // ===========================================
 // Context Assembly
