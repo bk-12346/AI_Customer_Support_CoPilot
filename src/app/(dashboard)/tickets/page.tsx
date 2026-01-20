@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import { useRouter } from "next/navigation";
 
 interface Ticket {
   id: string;
@@ -18,6 +19,7 @@ interface Ticket {
 const TEST_ORG_ID = "0a2cf873-9887-4a5c-9544-29b036e8fac5";
 
 export default function TicketsPage() {
+  const router = useRouter();
   const [tickets, setTickets] = useState<Ticket[]>([]);
   const [loading, setLoading] = useState(true);
   const [syncing, setSyncing] = useState(false);
@@ -178,6 +180,7 @@ export default function TicketsPage() {
               {tickets.map((ticket) => (
                 <tr
                   key={ticket.id}
+                  onClick={() => router.push(`/tickets/${ticket.id}`)}
                   className="hover:bg-gray-50 cursor-pointer transition"
                 >
                   <td className="px-4 py-3">
